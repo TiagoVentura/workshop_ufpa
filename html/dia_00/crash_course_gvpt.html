@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Introdução Rápida ao R</title>
+
+<script src="crash_course_gvpt_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="crash_course_gvpt_files/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="crash_course_gvpt_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="crash_course_gvpt_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="crash_course_gvpt_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="crash_course_gvpt_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="crash_course_gvpt_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="crash_course_gvpt_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="crash_course_gvpt_files/navigation-1.1/tabsets.js"></script>
+<link href="crash_course_gvpt_files/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="crash_course_gvpt_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introdução Rápida ao R</h1>
+
+</div>
+
+
+<div id="planos-para-hoje." class="section level1">
+<h1>Planos para hoje.</h1>
+<p>Este código é uma curta introdução ao R. Este material foi adaptado de outros dois workshops em inglês que eu ofertei na Universidade de Maryland – ambos estão disponíveis na ementa deste workshop. A idéia deste material é cobrir questões básicas no R, e introduzir manipulacao de dados usando <code>tidyverse</code>.</p>
+<p>Este tutorial foi adaptado de materiais de <a href="http://ericdunford.com/">Eric Dunford</a>, <a href="https://nataliabueno.github.io/">Natalia Bueno</a>, e <a href="https://github.com/rochelleterman">Rochelle Terman</a></p>
+</div>
+<div id="o-que-é-o-r" class="section level1">
+<h1>O que é o R?</h1>
+<p>R é uma linguagem de programação de código aberto versátil, útil tanto para estatística quanto para ciência de dados. É Inspirado na linguagem de programação S..</p>
+<ul>
+<li>Software de código aberto.</li>
+<li>Superior (se não apenas comparável) às alternativas comerciais. Em janeiro de 2019, R ocupava o 12º lugar no índice TIOBE, que mede a popularidade das linguagens de programação. É amplamente utilizado na academia e na indústria, especialmente no círculo de cientistas de dados.</li>
+<li>Disponível em todas as plataformas (Unix, Windows, Linux).</li>
+<li>Como resultado de ser uma linguagem de dados aberta, se você fizer sua análise em R, qualquer pessoa poderá replicá-la facilmente.</li>
+<li>Não apenas para estatística, mas também <strong>programação de uso geral</strong>.</li>
+<li>É <strong>linguagem de objetos</strong> (= R possui objetos) e <strong>funcional</strong> (= Você pode escrever funções).</li>
+<li>Grande e crescente comunidade de usuários.</li>
+</ul>
+</div>
+<div id="rstudio" class="section level1">
+<h1>Rstudio</h1>
+<p>O RStudio é a principal interface gráfica do usuário (GUI) e o ambiente de desenvolvimento integrado (IDE) que facilita o uso do R.</p>
+</div>
+<div id="navegando-no-r-studio." class="section level1">
+<h1>Navegando no R Studio.</h1>
+<p><img src="rstudio.png" /></p>
+</div>
+<div id="noções-básicas-navegando-no-rstudio" class="section level1">
+<h1>Noções básicas: Navegando no RStudio</h1>
+<p>Abra o RStudio! Em seguida, abra um novo script clicando em “Arquivo -&gt; Novo arquivo -&gt; Script R” ou pressionando <code>Ctrl + Shift + N</code> (PC) ou<code>command + shift + N</code> (Mac). Depois de abrir um novo script, você verá quatro “painéis”.</p>
+<div id="painel-superior-esquerdo-entrada-script" class="section level2">
+<h2>Painel superior esquerdo (entrada / script)</h2>
+<p>Neste painel, você escreve seu código. Digite <code>2 + 2</code> no seu script e execute uma linha de código pressionando<code>command + enter</code> (Mac) ou <code>Ctrl + enter</code> (PC). Ou clique no botão “Executar” na parte superior do script.</p>
+<p>Uma hashtag <code>#</code> diz ao R que você não deseja que essa linha ou bloco de código seja executado - isso é chamado de <strong>comentando seu código</strong>. Isso é útil para você fazer anotações e pode até adicionar hashtags após linhas de código executável, na mesma linha.</p>
+<p>O nome do seu arquivo de script está na guia na parte superior da janela do script - o nome padrão é <code>Untitled1</code>. Certifique-se de salvar seu script clicando em “Arquivo -&gt; Salvar” ou <code>command + s</code> (Mac) ou<code>Ctrl + s</code> (PC). Você também pode clicar no ícone de disquete para salvar.</p>
+</div>
+<div id="painel-inferior-esquerdo-saída-console" class="section level2">
+<h2>Painel inferior esquerdo (saída / console)</h2>
+<p>O resultado do código é exibido no `console ’no painel inferior esquerdo. Esse espaço também é bom para procurar e experimentar o código que você não deseja salvar em seu script.</p>
+<p>No console, o prompt <code>&gt;</code> aparece um símbolo maior que. Se o seu prompt começar a parecer um símbolo <code>+</code> por engano, basta clicar no console e pressionar a tecla <code>esc</code> no teclado quantas vezes forem necessárias para retornar ao prompt.</p>
+<p>R usa <code>+</code> quando o código é dividido em várias linhas e R ainda espera mais código. Uma linha de código geralmente não termina até que R encontre um parâmetro ou pontuação de parada apropriado que conclua algum código, como parêntese fechado fechado <code>)</code>, colchete <code>]</code>, colchete <code>}</code> ou aspas `<code></code>.</p>
+</div>
+<div id="painel-superior-direito-ambiente-global" class="section level2">
+<h2>Painel superior direito (ambiente global)</h2>
+<p>Os dados são salvos na memória de R como <strong>objetos</strong>. Os objetos são simplesmente espaços reservados para um valor, expressão matemática, palavra, função ou conjunto de dados! A guia “Ambiente” global no painel superior direito exibe as variáveis que você atribuiu / salvou.</p>
+</div>
+<div id="painel-inferior-direito-arquivos-plotagens-pacotes-e-ajuda" class="section level2">
+<h2>Painel inferior direito (arquivos, plotagens, pacotes e ajuda)</h2>
+<p>Aqui você encontra guias úteis para navegar no sistema de arquivos, exibir gráficos, instalar pacotes e visualizar páginas de ajuda. Pressione a tecla <code>control</code> e um número (1 a 9) no teclado para atalho entre esses painéis e guias.</p>
+</div>
+</div>
+<div id="instalando-um-pacote-no-r" class="section level1">
+<h1>Instalando um pacote no R</h1>
+<p>Existem vários pacotes que são fornecidos com a distribuição R. Eles são conhecidos como <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html">pacotes básicos</a>. Porém, há pacotes criados por desenvolvedores que precisamos instalar e ativar no R.</p>
+<p>Pacotes são coleções de funções em R, dados e códigos compilados juntamente. Os passos para instalar e ativar um pacote são os seguintes.</p>
+<ol style="list-style-type: decimal">
+<li>Instalar o pacote – somente uma vez.</li>
+<li>Ativar o pacote</li>
+<li>Have fun!</li>
+</ol>
+<pre class="r"><code># Instalando um pacote.
+
+install.packages(&quot;ggplot2&quot;)
+install.packages(&quot;tidyverse&quot;)</code></pre>
+<pre class="r"><code># Activando the package
+library(&quot;ggplot2&quot;)
+library(&quot;tidyverse&quot;)</code></pre>
+</div>
+<div id="comandos-básicos-em-r" class="section level1">
+<h1>Comandos Básicos em R</h1>
+<div id="atribuindo-um-objeto" class="section level2">
+<h2>Atribuindo um objeto</h2>
+<p>Em termos simples, um “objeto” é um texto que representa um valor específico. Os nomes dos objetos podem conter apenas letras, números, ou sublinhados e pointos.</p>
+<pre class="r"><code># Objeto numérico
+x &lt;- 3
+
+# objeto de texto
+
+my_name &lt;- &quot;Tiago&quot;
+
+# Onde estão?
+ls()</code></pre>
+<pre><code>[1] &quot;my_name&quot; &quot;x&quot;      </code></pre>
+<pre class="r"><code># Remova um objeto
+rm(x)
+
+# Checando de novo
+ls()</code></pre>
+<pre><code>[1] &quot;my_name&quot;</code></pre>
+<pre class="r"><code># Você pode reescrevê-los.
+
+my_name &lt;- &quot;Tiago Da Silva Ventura&quot;
+
+my_name</code></pre>
+<pre><code>[1] &quot;Tiago Da Silva Ventura&quot;</code></pre>
+</div>
+</div>
+<div id="estrutura-dos-dados." class="section level1">
+<h1>Estrutura dos Dados.</h1>
+<p>Um objeto pode ter diferente estruturas. Vamos vê-las rapidamente.</p>
+<ul>
+<li><code>vector</code></li>
+<li><code>matrix</code></li>
+<li><code>data.frame</code></li>
+<li><code>list</code></li>
+<li><code>array</code></li>
+</ul>
+<div id="vector" class="section level2">
+<h2>Vector</h2>
+<pre class="r"><code># vetor de números
+X &lt;- c(1, 2.3, 4, 5, 6.78, 6:10)
+X</code></pre>
+<pre><code> [1]  1.00  2.30  4.00  5.00  6.78  6.00  7.00  8.00  9.00 10.00</code></pre>
+<pre class="r"><code># Class
+class(X)</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="data-frame" class="section level2">
+<h2>Data Frame</h2>
+<p>O tipo de objeto mais útil para análise de dados. É como uma planilha de excel no seu ambiente R.</p>
+<pre class="r"><code># Coercing
+as.data.frame(X)</code></pre>
+<pre><code>       X
+1   1.00
+2   2.30
+3   4.00
+4   5.00
+5   6.78
+6   6.00
+7   7.00
+8   8.00
+9   9.00
+10 10.00</code></pre>
+<pre class="r"><code># Create a data frame
+
+data &lt;- data.frame(name = &quot;Tiago&quot;, last_name = &quot;ventura&quot;, school = &quot;UMD&quot;, age = 30)
+
+data</code></pre>
+<pre><code>   name last_name school age
+1 Tiago   ventura    UMD  30</code></pre>
+</div>
+<div id="matrix" class="section level2">
+<h2>Matrix</h2>
+<p>Igual ao data frame, porém comporta somente um tipo de dado.</p>
+<pre class="r"><code># Coerce to a matrix
+as.matrix(X)</code></pre>
+<pre><code>       [,1]
+ [1,]  1.00
+ [2,]  2.30
+ [3,]  4.00
+ [4,]  5.00
+ [5,]  6.78
+ [6,]  6.00
+ [7,]  7.00
+ [8,]  8.00
+ [9,]  9.00
+[10,] 10.00</code></pre>
+</div>
+<div id="list" class="section level2">
+<h2>List</h2>
+<p>A lista é extremamente útil para aplicações mais avançadas. Funciona como um repositório de vários objetos. É como uma grande gaveta onde você pode salvar sua bagunça.</p>
+<pre class="r"><code># coerce to a list
+
+as.list(X)</code></pre>
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] 2.3
+
+[[3]]
+[1] 4
+
+[[4]]
+[1] 5
+
+[[5]]
+[1] 6.78
+
+[[6]]
+[1] 6
+
+[[7]]
+[1] 7
+
+[[8]]
+[1] 8
+
+[[9]]
+[1] 9
+
+[[10]]
+[1] 10</code></pre>
+<pre class="r"><code># or
+
+list &lt;- list(X, data)
+
+# See the list
+
+str(list)</code></pre>
+<pre><code>List of 2
+ $ : num [1:10] 1 2.3 4 5 6.78 6 7 8 9 10
+ $ :&#39;data.frame&#39;:   1 obs. of  4 variables:
+  ..$ name     : Factor w/ 1 level &quot;Tiago&quot;: 1
+  ..$ last_name: Factor w/ 1 level &quot;ventura&quot;: 1
+  ..$ school   : Factor w/ 1 level &quot;UMD&quot;: 1
+  ..$ age      : num 30</code></pre>
+</div>
+</div>
+<div id="working-directory" class="section level1">
+<h1>Working Directory</h1>
+<p>Definir sua estação de trabalho é um passo que sempre causa muita dor de cabeça à iniciantes em R. É simples, porém, como somos treinados com o point-and-click do windows, no começo pode parecer difícil.</p>
+<p>O <code>R</code> não sabe intuitivamente onde estão seus dados. Se os dados estiverem em uma pasta especial chamada “pesquisa super secreta”, temos que dizer ao <code>R</code> como chegar lá.</p>
+<p>Podemos fazer isso de duas maneiras:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Defina o <strong>diretório de trabalho</strong> para essa pasta</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Estabeleça o <strong>caminho</strong> para essa pasta</li>
+</ol></li>
+</ul>
+<p>Toda vez que o <code>R</code> é inicializado, ele olha para o mesmo lugar, a menos que seja solicitado a ir para outro lugar.</p>
+<pre class="r"><code>getwd()  # Obter o diretório de trabalho atual</code></pre>
+<pre><code>[1] &quot;C:/Users/Tiago Ventura/Dropbox/webscraping_workshop_ufpa/html/dia_00&quot;</code></pre>
+<p>Definindo um novo diretório de trabalho</p>
+<pre class="r"><code># adicione onde você quer o R olhando.
+
+setwd(&quot;C:/Users/Tiago Ventura/Dropbox/webscraping_workshop_ufpa/html/dia_00&quot;)</code></pre>
+</div>
+<div id="manipulação-de-dados-com-o-tidyverse" class="section level1">
+<h1>Manipulação de dados com o Tidyverse</h1>
+<p>O tidyverse nada mais é do que um conjunto de pacotes R construídos para nos ajudar a fazer ciência de dados. Todos os pacotes compartilham a mesma filosofia de design, gramática e estruturas de dados subjacentes. Portanto, se você aprender um, os outros pacotes ficarão mais fáceis. Os principais pacotes do tidyverse são:</p>
+<ul>
+<li><p><strong>dplyr</strong>: para manipulação de dados</p></li>
+<li><p><strong>ggplot2</strong>: para visualização de dados</p></li>
+<li><p><strong>tidyr</strong>: para modelagem e gerenciamento de dados</p></li>
+<li><p><strong>purrr</strong>: para otimizar seu código e para programação funcional</p></li>
+<li><p><strong>readr</strong>: para abrir e organizar os dados</p></li>
+</ul>
+<p>Nessa curta introdução, abordaremos principalmente o belo mundo do gerenciamento de dados usando dplyr.</p>
+<div id="por-que-devo-usar-os-pacotes-tidyverse" class="section level2">
+<h2>Por que devo usar os pacotes tidyverse?</h2>
+<p>As principais vantagens:</p>
+<ul>
+<li><p>Mais fácil de executar análise de dados em comparação com a base R</p></li>
+<li><p>Aument substancialmente quão legível seu código parece.</p></li>
+<li><p>Integra bem com uma série de outros pacotes.</p></li>
+<li><p>Programadores mais avançados usam, portanto, provavelmente você precisa aprender para ler códigos no futuro.</p></li>
+</ul>
+<div id="instalação" class="section level3">
+<h3>Instalação</h3>
+<pre class="r"><code># Install from CRAN
+install.packages(&quot;tidyverse&quot;)
+
+# Or the development version from GitHub install.packages(&#39;devtools&#39;)
+
+devtools::install_github(&quot;hadley/tidyverse&quot;)</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+</div>
+</div>
+<div id="o-pipe" class="section level2">
+<h2>O pipe</h2>
+<p>Todos os pacotes no tidyverse dependem do uso da função pipe <code>%&gt;%</code> do pacote <code>magritt</code>. O pipe é seu amigo, lembre-se disso, portanto vamos aprender a usá-lo.</p>
+<p>A idéia por trás do pipe é bastante simples: você coloca as coisas umas em seguida das outras. O objetivo é evitar como o R lê códigos de dentro para fora.</p>
+<p>A lógica com pipe: primeiro o objeto, depois as funções e, em seguida, uma sequência de funções. O pipe torna possível encadear facilmente uma sequência de funções</p>
+<pre class="r"><code># Exemplo 1
+
+# R
+
+round(exp(diff(log(runif(100, 0, 1)))), 1)
+
+# Com pipe
+
+runif(100, 0, 1) %&gt;% log() %&gt;% diff() %&gt;% exp() %&gt;% round(., 1)  # or round(1)</code></pre>
+<pre class="r"><code># OBSERVAÇÃO AQUI: se for uma função do tidyverse, os dados serão sempre o
+# primeiro argumento, portanto, não é necessário adicionar o período. Se não
+# for, você deve adicionar o período no argumento de dados
+
+# data %&gt;% function_tidyverse() %&gt;% lm( y~x, data=. )
+
+mtcars %&gt;% lm(mpg ~ cyl, data = .) %&gt;% coef()</code></pre>
+<pre><code>(Intercept)         cyl 
+   37.88458    -2.87579 </code></pre>
+<pre class="r"><code># Exampl2 2: Graph
+
+plot(density(rnorm(1000, 0, 1)))</code></pre>
+<p><img src="crash_course_gvpt_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="r"><code># With pipe
+
+rnorm(1000, 0, 1) %&gt;% density() %&gt;% plot()</code></pre>
+<p><img src="crash_course_gvpt_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+</div>
+</div>
+<div id="dplyr-para-manipulação-de-dados." class="section level1">
+<h1>Dplyr para Manipulação de Dados.</h1>
+<p>O dplyr é o pacote tidyverse mais famoso. Ele lida com gerenciamento de dados. É o meu pacote favorito em todo o mundo R. Comecei a trabalhar com o dplyr dois anos depois de aprender R, e isso realmente facilitou minha vida.</p>
+<div id="acessando-dados.-bonus-electionsbr" class="section level2">
+<h2>Acessando dados. Bonus: electionsBR</h2>
+<p>O primeiro passo em todas as análises é abrir seu banco de dados. Aqui, como um bonus, vamos utilizar dados eleitorais acessados via <code>electionsBR</code>. A documentação para este pacote está <a href="http://electionsbr.com/">aqui</a>. O <code>electionsBR</code>é um exemplo fenômenal das vantagens de utilizar R. É um pacote de R que agregar várias funções para acessar facilmente dados eleitorais disponíveis no TSE.</p>
+<p>Um dos criadores do pacote, Fernando Meirelese, escreveu um <a href="https://fmeireles.com/blog/rstats/electionsbr-analisando-a-apuracao-das-eleicoes-para-a-camara-dos-deputados/">tutorial</a> super útil para o pacote. Vocês podem visitar.</p>
+<p>Vamos baixar a votaçao por partidos no Pará, agregados por zonas eleitorais.</p>
+<pre class="r"><code># install.packages(&#39;electionsBR&#39;)
+library(electionsBR)
+library(kableExtra)
+
+# Importando dados
+d &lt;- party_mun_zone_fed(2014, uf = &quot;PA&quot;)
+
+# O que sao os dados?
+glimpse(d)</code></pre>
+<pre><code>Observations: 11,961
+Variables: 22
+$ DATA_GERACAO        &lt;chr&gt; &quot;17/05/2018&quot;, &quot;17/05/2018&quot;, &quot;17/05/2018&quot;, ...
+$ HORA_GERACAO        &lt;drtn&gt; 04:15:39, 04:15:39, 04:15:39, 04:15:39, 0...
+$ ANO_ELEICAO         &lt;dbl&gt; 2014, 2014, 2014, 2014, 2014, 2014, 2014, ...
+$ NUM_TURNO           &lt;dbl&gt; 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+$ DESCRICAO_ELEICAO   &lt;chr&gt; &quot;Eleições Gerais 2014&quot;, &quot;Eleições Gerais 2...
+$ SIGLA_UF            &lt;chr&gt; &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, ...
+$ SIGLA_UE            &lt;chr&gt; &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, &quot;PA&quot;, ...
+$ CODIGO_MUNICIPIO    &lt;chr&gt; &quot;04057&quot;, &quot;04340&quot;, &quot;04316&quot;, &quot;05274&quot;, &quot;04600...
+$ NOME_MUNICIPIO      &lt;chr&gt; &quot;AFUÁ&quot;, &quot;AURORA DO PARÁ&quot;, &quot;BONITO&quot;, &quot;SANTA...
+$ NUMERO_ZONA         &lt;dbl&gt; 16, 49, 11, 2, 23, 57, 57, 62, 86, 34, 74,...
+$ CODIGO_CARGO        &lt;dbl&gt; 7, 7, 3, 3, 3, 5, 6, 6, 6, 6, 6, 6, 6, 6, ...
+$ DESCRICAO_CARGO     &lt;chr&gt; &quot;Deputado Estadual&quot;, &quot;Deputado Estadual&quot;, ...
+$ TIPO_LEGENDA        &lt;chr&gt; &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C&quot;, &quot;P&quot;, &quot;C&quot;, &quot;C&quot;, &quot;C...
+$ NOME_COLIGACAO      &lt;chr&gt; &quot;AQUI O PARÁ TEM CHANCE&quot;, &quot;PDT, PPL, PTN E...
+$ COMPOSICAO_LEGENDA  &lt;chr&gt; &quot;PTC / PT do B&quot;, &quot;PDT / PPL / PTN / PSL&quot;, ...
+$ SIGLA_PARTIDO       &lt;chr&gt; &quot;PTC&quot;, &quot;PPL&quot;, &quot;PSDB&quot;, &quot;PSDB&quot;, &quot;PSDB&quot;, &quot;PST...
+$ NUMERO_PARTIDO      &lt;dbl&gt; 36, 54, 45, 45, 45, 16, 10, 11, 14, 16, 25...
+$ NOME_PARTIDO        &lt;chr&gt; &quot;Partido Trabalhista Cristão&quot;, &quot;Partido Pá...
+$ QTDE_VOTOS_NOMINAIS &lt;dbl&gt; 91, 179, 4612, 1113, 3092, 3, 25, 4, 736, ...
+$ QTDE_VOTOS_LEGENDA  &lt;dbl&gt; 4, 11, 0, 0, 0, 0, 4, 29, 27, 8, 20, 6, 19...
+$ TRANSITO            &lt;chr&gt; &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N...
+$ SEQUENCIAL_LEGENDA  &lt;dbl&gt; 1.4e+11, 1.4e+11, 1.4e+11, 1.4e+11, 1.4e+1...</code></pre>
+</div>
+<div id="funções" class="section level2">
+<h2>Funções</h2>
+<div id="as-mais-úteis" class="section level3">
+<h3>As mais úteis</h3>
+<ul>
+<li><strong>select()</strong>: select colunas</li>
+<li><strong>mutate()</strong>: cria novas variáveis e altera existentes</li>
+<li><strong>filter()</strong>: filtra o banco de dados</li>
+<li><strong>summarize()</strong>: sumariza os dados</li>
+<li><strong>group_by()</strong>: agrupa e faz análise de acordo com as variáveis.</li>
+<li><strong>slice()</strong>: seleciona linhas específicas</li>
+</ul>
+</div>
+<div id="some-others" class="section level3">
+<h3>Some others</h3>
+<ul>
+<li><strong>count()</strong>: coonta dos dados por subgroup.</li>
+<li><strong>arrange()</strong>: ordena o banco de dados por colunas</li>
+<li><strong>distinct()</strong>: elimina repetições</li>
+<li><strong>n()</strong>: conta quantas observações há em dados agrupados.</li>
+<li><strong>sample_n()</strong>: Selecion N amostras do seu banco de dadosl</li>
+<li><strong>glimpse()</strong>: Fornece um sumário dos seus dados. quickly preview the data</li>
+<li><strong>top_n()</strong>: Seleciona por linhas de acordo com o rank das variáveis.</li>
+</ul>
+</div>
+<div id="select" class="section level3">
+<h3>Select</h3>
+<pre class="r"><code># Dplyr
+
+d &lt;- d %&gt;% select(CODIGO_CARGO, NOME_COLIGACAO, SIGLA_PARTIDO, NOME_MUNICIPIO, 
+    QTDE_VOTOS_NOMINAIS, QTDE_VOTOS_LEGENDA)
+
+
+
+# Se voce nao quiser usar o pipe
+
+select(d, CODIGO_CARGO, NOME_COLIGACAO, SIGLA_PARTIDO, NOME_MUNICIPIO, QTDE_VOTOS_NOMINAIS, 
+    QTDE_VOTOS_LEGENDA)</code></pre>
+<pre><code># A tibble: 11,961 x 6
+   CODIGO_CARGO NOME_COLIGACAO SIGLA_PARTIDO NOME_MUNICIPIO
+          &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;         
+ 1            7 AQUI O PARÁ T~ PTC           AFUÁ          
+ 2            7 PDT, PPL, PTN~ PPL           AURORA DO PARÁ
+ 3            3 JUNTOS COM O ~ PSDB          BONITO        
+ 4            3 JUNTOS COM O ~ PSDB          SANTA CRUZ DO~
+ 5            3 JUNTOS COM O ~ PSDB          NOVA IPIXUNA  
+ 6            5 PARTIDO ISOLA~ PSTU          SÃO DOMINGOS ~
+ 7            6 A FORÇA DA NO~ PRB           BREJO GRANDE ~
+ 8            6 UNIÃO PELO PA~ PP            PIÇARRA       
+ 9            6 UNIÃO PELO PA~ PTB           CURRALINHO    
+10            6 FRENTE DE ESQ~ PSTU          ITAITUBA      
+# ... with 11,951 more rows, and 2 more variables:
+#   QTDE_VOTOS_NOMINAIS &lt;dbl&gt;, QTDE_VOTOS_LEGENDA &lt;dbl&gt;</code></pre>
+<pre class="r"><code># Retirar Coluna
+d %&gt;% select(-CODIGO_CARGO)</code></pre>
+<pre><code># A tibble: 11,961 x 5
+   NOME_COLIGACAO SIGLA_PARTIDO NOME_MUNICIPIO QTDE_VOTOS_NOMI~
+   &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;                     &lt;dbl&gt;
+ 1 AQUI O PARÁ T~ PTC           AFUÁ                         91
+ 2 PDT, PPL, PTN~ PPL           AURORA DO PARÁ              179
+ 3 JUNTOS COM O ~ PSDB          BONITO                     4612
+ 4 JUNTOS COM O ~ PSDB          SANTA CRUZ DO~             1113
+ 5 JUNTOS COM O ~ PSDB          NOVA IPIXUNA               3092
+ 6 PARTIDO ISOLA~ PSTU          SÃO DOMINGOS ~                3
+ 7 A FORÇA DA NO~ PRB           BREJO GRANDE ~               25
+ 8 UNIÃO PELO PA~ PP            PIÇARRA                       4
+ 9 UNIÃO PELO PA~ PTB           CURRALINHO                  736
+10 FRENTE DE ESQ~ PSTU          ITAITUBA                      9
+# ... with 11,951 more rows, and 1 more variable: QTDE_VOTOS_LEGENDA &lt;dbl&gt;</code></pre>
+</div>
+<div id="filter." class="section level3">
+<h3>Filter.</h3>
+<pre class="r"><code># Somente o PT
+
+d %&gt;% filter(SIGLA_PARTIDO == &quot;PT&quot;)</code></pre>
+<pre><code># A tibble: 474 x 6
+   CODIGO_CARGO NOME_COLIGACAO SIGLA_PARTIDO NOME_MUNICIPIO
+          &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;         
+ 1            5 TODOS PELO PA~ PT            TRAIRÃO       
+ 2            6 TODOS PELO PA~ PT            CONCEIÇÃO DO ~
+ 3            7 TODOS PELO PA~ PT            NOVA ESPERANÇ~
+ 4            5 TODOS PELO PA~ PT            OURILÂNDIA DO~
+ 5            7 TODOS PELO PA~ PT            OURÉM         
+ 6            5 TODOS PELO PA~ PT            BAGRE         
+ 7            5 TODOS PELO PA~ PT            SALINÓPOLIS   
+ 8            6 TODOS PELO PA~ PT            BARCARENA     
+ 9            6 TODOS PELO PA~ PT            BELÉM         
+10            7 TODOS PELO PA~ PT            INHANGAPI     
+# ... with 464 more rows, and 2 more variables: QTDE_VOTOS_NOMINAIS &lt;dbl&gt;,
+#   QTDE_VOTOS_LEGENDA &lt;dbl&gt;</code></pre>
+<pre class="r"><code># Duas condicoes
+
+d %&gt;% filter(SIGLA_PARTIDO == &quot;PT&quot;, NOME_MUNICIPIO == &quot;BELÉM&quot;)</code></pre>
+<pre><code># A tibble: 33 x 6
+   CODIGO_CARGO NOME_COLIGACAO SIGLA_PARTIDO NOME_MUNICIPIO
+          &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;         
+ 1            6 TODOS PELO PA~ PT            BELÉM         
+ 2            6 TODOS PELO PA~ PT            BELÉM         
+ 3            7 TODOS PELO PA~ PT            BELÉM         
+ 4            7 TODOS PELO PA~ PT            BELÉM         
+ 5            6 TODOS PELO PA~ PT            BELÉM         
+ 6            6 TODOS PELO PA~ PT            BELÉM         
+ 7            5 TODOS PELO PA~ PT            BELÉM         
+ 8            7 TODOS PELO PA~ PT            BELÉM         
+ 9            7 TODOS PELO PA~ PT            BELÉM         
+10            6 TODOS PELO PA~ PT            BELÉM         
+# ... with 23 more rows, and 2 more variables: QTDE_VOTOS_NOMINAIS &lt;dbl&gt;,
+#   QTDE_VOTOS_LEGENDA &lt;dbl&gt;</code></pre>
+</div>
+<div id="mutate-criar-novas-variáveis" class="section level3">
+<h3>Mutate: Criar novas variáveis</h3>
+<pre class="r"><code># Razão entre a quantidade de votos de legenda e nominais para deputado
+# federal
+
+# Primeiro, limite a deputados federais.
+
+d &lt;- d %&gt;% filter(CODIGO_CARGO == 6)
+
+d %&gt;% mutate(razaovotos = QTDE_VOTOS_LEGENDA/(QTDE_VOTOS_NOMINAIS + QTDE_VOTOS_LEGENDA)) %&gt;% 
+    select(razaovotos, SIGLA_PARTIDO, NOME_MUNICIPIO)</code></pre>
+<pre><code># A tibble: 4,740 x 3
+   razaovotos SIGLA_PARTIDO NOME_MUNICIPIO          
+        &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;                   
+ 1     0.138  PRB           BREJO GRANDE DO ARAGUAIA
+ 2     0.879  PP            PIÇARRA                 
+ 3     0.0354 PTB           CURRALINHO              
+ 4     0.471  PSTU          ITAITUBA                
+ 5     0.0170 DEM           TUCUMÃ                  
+ 6     1      PRP           BAIÃO                   
+ 7     0.463  PRP           NOVO REPARTIMENTO       
+ 8     0.109  PRB           ALMEIRIM                
+ 9     0.0222 PRB           BELTERRA                
+10     0.119  PDT           BELÉM                   
+# ... with 4,730 more rows</code></pre>
+</div>
+<div id="arrange-para-ordernar" class="section level3">
+<h3>Arrange: para ordernar</h3>
+<pre class="r"><code># What was the largest difference in gols?
+
+d %&gt;% mutate(razaovotos = QTDE_VOTOS_LEGENDA/(QTDE_VOTOS_NOMINAIS + QTDE_VOTOS_LEGENDA)) %&gt;% 
+    select(razaovotos, SIGLA_PARTIDO, NOME_MUNICIPIO) %&gt;% arrange(desc(razaovotos))</code></pre>
+<pre><code># A tibble: 4,740 x 3
+   razaovotos SIGLA_PARTIDO NOME_MUNICIPIO         
+        &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;                  
+ 1          1 PRP           BAIÃO                  
+ 2          1 PMN           SANTA LUZIA DO PARÁ    
+ 3          1 PTN           TUCUMÃ                 
+ 4          1 PTC           XINGUARA               
+ 5          1 PPL           DOM ELISEU             
+ 6          1 PRP           OURÉM                  
+ 7          1 PTN           PRIMAVERA              
+ 8          1 PT do B       PIÇARRA                
+ 9          1 PTN           SÃO CAETANO DE ODIVELAS
+10          1 PRP           MARACANÃ               
+# ... with 4,730 more rows</code></pre>
+<pre class="r"><code># Elimine 1. Sao partidos que receberam somente votos de legenda
+
+d %&gt;% mutate(razaovotos = QTDE_VOTOS_LEGENDA/(QTDE_VOTOS_NOMINAIS + QTDE_VOTOS_LEGENDA)) %&gt;% 
+    select(razaovotos, SIGLA_PARTIDO, NOME_MUNICIPIO) %&gt;% arrange(desc(razaovotos)) %&gt;% 
+    filter(razaovotos != 1)</code></pre>
+<pre><code># A tibble: 3,901 x 3
+   razaovotos SIGLA_PARTIDO NOME_MUNICIPIO         
+        &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;                  
+ 1      0.978 PRP           FLORESTA DO ARAGUAIA   
+ 2      0.974 PPL           NOVA ESPERANÇA DO PIRIÁ
+ 3      0.974 PHS           PARAGOMINAS            
+ 4      0.974 PRP           CAPITÃO POÇO           
+ 5      0.972 PRP           TUCUMÃ                 
+ 6      0.971 PRP           TUCURUÍ                
+ 7      0.967 PHS           MARABÁ                 
+ 8      0.964 PHS           DOM ELISEU             
+ 9      0.963 PRP           VISEU                  
+10      0.961 PHS           SANTARÉM               
+# ... with 3,891 more rows</code></pre>
+<p>Vamos agora extrair algo mais interessante desses dados, e combinar algumas operacoes. Vamos ver a distribuição para votos de legenda para os maiores partidos do Brasil.</p>
+<pre class="r"><code>d_new &lt;- d %&gt;% 
+# Repetimos o que fizemos
+mutate(razaovotos = QTDE_VOTOS_LEGENDA/(QTDE_VOTOS_NOMINAIS + QTDE_VOTOS_LEGENDA)) %&gt;% 
+    
+select(razaovotos, SIGLA_PARTIDO, NOME_MUNICIPIO) %&gt;% 
+filter(razaovotos != 1) %&gt;% 
+# Vamos filtrar pelos 5 maiores partidos
+
+filter(SIGLA_PARTIDO %in% c(&quot;PT&quot;, &quot;PSDB&quot;, &quot;PSB&quot;, &quot;DEM&quot;, &quot;PP&quot;))
+
+
+# Grafico
+ggplot(d_new, aes(y = razaovotos, x = SIGLA_PARTIDO, fill = SIGLA_PARTIDO)) + 
+    
+geom_boxplot(alpha = 0.5) + 
+xlab(&quot;Sigla Partido&quot;) + 
+ylab(&quot;Votos de Legenda / Votos Total &quot;)</code></pre>
+<p><img src="crash_course_gvpt_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+<div id="slice-para-selecionar-linhas" class="section level3">
+<h3>Slice: Para Selecionar Linhas</h3>
+<pre class="r"><code># Mais votos do PSL
+
+d %&gt;% arrange(desc(QTDE_VOTOS_NOMINAIS)) %&gt;% filter(SIGLA_PARTIDO == &quot;PSL&quot;) %&gt;% 
+    slice(1:5)</code></pre>
+<pre><code># A tibble: 5 x 6
+  CODIGO_CARGO NOME_COLIGACAO SIGLA_PARTIDO NOME_MUNICIPIO QTDE_VOTOS_NOMI~
+         &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;                     &lt;dbl&gt;
+1            6 DEFENDENDO O ~ PSL           BARCARENA                  2025
+2            6 DEFENDENDO O ~ PSL           NOVO REPARTIM~             1241
+3            6 DEFENDENDO O ~ PSL           BELÉM                       678
+4            6 DEFENDENDO O ~ PSL           BELÉM                       563
+5            6 DEFENDENDO O ~ PSL           ANANINDEUA                  437
+# ... with 1 more variable: QTDE_VOTOS_LEGENDA &lt;dbl&gt;</code></pre>
+<pre class="r"><code>View(d)</code></pre>
+</div>
+<div id="group-by-sumarize-agregar-por-grupos-e-calcular-valores" class="section level3">
+<h3>Group by + sumarize : Agregar por grupos e calcular valores</h3>
+<ul>
+<li><p>Primeiro: Use group_by para agregar</p></li>
+<li><p>Segundo: Use summarize para calcular algo do seu interesse</p></li>
+<li><p>Terceiro: Use ungroup para desagrupar</p></li>
+</ul>
+<p><strong>Summarize</strong>: Transforma várias linhas em uma.</p>
+<p>Exemplos de operações dentro de summarize</p>
+<ul>
+<li>min(x) - minimo de x.</li>
+<li>max(x) - máximo de x.</li>
+<li>mean(x) - média de x.</li>
+<li>median(x) - mediana de x.</li>
+<li>quantile(x, p) - quantile de x.</li>
+<li>sd(x) - desvio padrão de x.</li>
+<li>var(x) - variancia de x.</li>
+</ul>
+<pre class="r"><code># Média e total dos votos por Partido no Estado
+
+d %&gt;% 
+group_by(SIGLA_PARTIDO) %&gt;% 
+summarise(media_votos = mean(QTDE_VOTOS_NOMINAIS, na.rm = TRUE), total_votos = sum(QTDE_VOTOS_NOMINAIS, 
+    na.rm = TRUE)) %&gt;% ungroup()</code></pre>
+<pre><code># A tibble: 30 x 3
+   SIGLA_PARTIDO media_votos total_votos
+   &lt;chr&gt;               &lt;dbl&gt;       &lt;dbl&gt;
+ 1 DEM                1462.       230925
+ 2 PC do B             117.        18474
+ 3 PCB                 NaN             0
+ 4 PDT                 751.       118667
+ 5 PEN                  41.6        6575
+ 6 PHS                  19.1        3012
+ 7 PMDB               2766.       437085
+ 8 PMN                  46.1        7280
+ 9 PP                  398.        62849
+10 PPL                  20.7        3270
+# ... with 20 more rows</code></pre>
+<pre class="r"><code># Principal Munícipio dos 5 maiores partidos
+
+d %&gt;% 
+group_by(SIGLA_PARTIDO, NOME_MUNICIPIO) %&gt;% 
+summarise(total_votos = sum(QTDE_VOTOS_NOMINAIS, na.rm = TRUE)) %&gt;% 
+filter(SIGLA_PARTIDO %in% c(&quot;DEM&quot;, &quot;PT&quot;, &quot;PSDB&quot;, &quot;PP&quot;, &quot;PSB&quot;)) %&gt;% 
+top_n(1)</code></pre>
+<pre><code># A tibble: 5 x 3
+# Groups:   SIGLA_PARTIDO [5]
+  SIGLA_PARTIDO NOME_MUNICIPIO total_votos
+  &lt;chr&gt;         &lt;chr&gt;                &lt;dbl&gt;
+1 DEM           SANTARÉM             41413
+2 PP            BELÉM                11667
+3 PSB           SANTARÉM             14137
+4 PSDB          BELÉM                38715
+5 PT            BELÉM                38431</code></pre>
+</div>
+</div>
+<div id="outras-funções-úteis" class="section level2">
+<h2>Outras funções úteis</h2>
+<div id="glimpse-ver-seu-banco" class="section level4">
+<h4>Glimpse: Ver seu banco</h4>
+<pre class="r"><code>glimpse(d)</code></pre>
+<pre><code>Observations: 4,740
+Variables: 6
+$ CODIGO_CARGO        &lt;dbl&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, ...
+$ NOME_COLIGACAO      &lt;chr&gt; &quot;A FORÇA DA NOSSA GENTE&quot;, &quot;UNIÃO PELO PARÁ...
+$ SIGLA_PARTIDO       &lt;chr&gt; &quot;PRB&quot;, &quot;PP&quot;, &quot;PTB&quot;, &quot;PSTU&quot;, &quot;DEM&quot;, &quot;PRP&quot;, ...
+$ NOME_MUNICIPIO      &lt;chr&gt; &quot;BREJO GRANDE DO ARAGUAIA&quot;, &quot;PIÇARRA&quot;, &quot;CU...
+$ QTDE_VOTOS_NOMINAIS &lt;dbl&gt; 25, 4, 736, 9, 1155, 0, 22, 163, 44, 349, ...
+$ QTDE_VOTOS_LEGENDA  &lt;dbl&gt; 4, 29, 27, 8, 20, 6, 19, 20, 1, 47, 6, 1, ...</code></pre>
+</div>
+<div id="count-contar-casos-agrupoados" class="section level3">
+<h3>Count: Contar casos agrupoados</h3>
+<pre class="r"><code># Número de Zonais que os partidos receberam votos
+
+d %&gt;% 
+# exclue zero
+
+filter(QTDE_VOTOS_NOMINAIS &gt; 0) %&gt;% 
+# Contando
+
+count(SIGLA_PARTIDO)</code></pre>
+<pre><code># A tibble: 28 x 2
+   SIGLA_PARTIDO     n
+   &lt;chr&gt;         &lt;int&gt;
+ 1 DEM             158
+ 2 PC do B         143
+ 3 PDT             158
+ 4 PEN             132
+ 5 PHS              84
+ 6 PMDB            158
+ 7 PMN             124
+ 8 PP              157
+ 9 PPL             100
+10 PPS             154
+# ... with 18 more rows</code></pre>
+<pre class="r"><code># Nice graph
+
+
+d_for_the_graph &lt;- d %&gt;% 
+# exclue zero
+
+filter(QTDE_VOTOS_NOMINAIS &gt; 0) %&gt;% 
+# Contando
+
+count(SIGLA_PARTIDO, name = &quot;VotoNominal&quot;)
+
+d_for_the_graph2 &lt;- d %&gt;% 
+# exclue zero
+
+filter(QTDE_VOTOS_LEGENDA &gt; 0) %&gt;% 
+# Contando
+
+count(SIGLA_PARTIDO, name = &quot;VotoLegenda&quot;)
+
+
+# Ligar os dois data frames
+
+d_for_graph &lt;- left_join(d_for_the_graph, d_for_the_graph2)
+
+library(ggrepel)
+ggplot(d_for_graph, aes(y = VotoNominal, x = VotoLegenda, label = SIGLA_PARTIDO)) + 
+    geom_point() + geom_label_repel() + geom_segment(aes(y = 80, yend = 160, 
+    x = 80, xend = 160))</code></pre>
+<p><img src="crash_course_gvpt_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Finalizamos aqui nossa introdução ao R. Como disse no início, há mais material de introdução disponível no website deste workshop. A curva de aprendizado inicial do R é forte, e você pode pensar em desistir muitas vezes. Porém, com um pouco de persistências, e programando um pouquinho todo dia, é possível dominar completamente a linguagem.</p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

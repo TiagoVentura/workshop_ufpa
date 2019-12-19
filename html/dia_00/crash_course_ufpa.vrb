@@ -1,0 +1,18 @@
+
+\begin{verbatim}
+## # A tibble: 30 x 2
+##    SIGLA_PARTIDO     n
+##    <chr>         <int>
+##  1 DEM             316
+##  2 PC do B         299
+##  3 PDT             316
+##  4 PEN             285
+##  5 PHS             237
+##  6 PMDB            632
+##  7 PMN             278
+##  8 PP              471
+##  9 PPL             228
+## 10 PPS             311
+## # ... with 20 more rows
+\end{verbatim}
+

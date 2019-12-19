@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Acessando APIs: Estudo de Caso do Twitter</title>
+
+<script src="02_Apis_intro_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="02_Apis_intro_files/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="02_Apis_intro_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="02_Apis_intro_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="02_Apis_intro_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="02_Apis_intro_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="02_Apis_intro_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="02_Apis_intro_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="02_Apis_intro_files/navigation-1.1/tabsets.js"></script>
+<link href="02_Apis_intro_files/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="02_Apis_intro_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Acessando APIs: Estudo de Caso do Twitter</h1>
+
+</div>
+
+
+<div id="nossos-planos-para-hoje." class="section level1">
+<h1>Nossos planos para hoje.</h1>
+<p>O objetivo deste workshop é ensinar os primeiros passos de como coletar dados na internet. No primeiro dia, aprendemos como raspar dados de sites estáticos. Hoje, aprenderemos como acessar APIs. Vamos seguir a seguinte rotina:</p>
+<ol style="list-style-type: decimal">
+<li><p>Introdução a APIs. O que fazem? Onde vivem? O que comem?</p></li>
+<li>Acessando APIs via http.
+<ul>
+<li>Estudo de caso na API do Fogo Cruzado.</li>
+</ul></li>
+<li>Exemplos de pacotes de R para acessar APIs
+<ul>
+<li>Fogo Cruzado</li>
+<li>Dados do Congresso (bRasilLegis)</li>
+</ul></li>
+<li><p>Exercício</p></li>
+<li><p>Utilizando a API do Twitter.</p></li>
+</ol>
+</div>
+<div id="introdução-a-apis.-o-que-fazem-onde-vivem-o-que-comem" class="section level1">
+<h1>Introdução a APIs. O que fazem? Onde vivem? O que comem?</h1>
+<p>A sigla API corresponde às palavras em inglês “Application Programming Interface“. No português “Interface de Programação de Aplicações”. Em linguagem não técnica, uma API é um repositório on-line construído para facilitar troca de informações. Muita empresas constroem este repositórios para diversas funções, entre elas, compartilhar dados, receber dados, gerenciamento conjunto de banco de dados, e fornecer funções ou maquinas de inteligência artificial para uso do público.</p>
+<p>Vamos pensar um exemplo capaz de motivar a criação de uma API. Imagine que você é o dono do Twitter. Você teria zilhões de hackers todos os dias tentar fazer raspagem dos seus dados, isso tornaria seu site mais instável, e inseguro. Qual a solução? Você cria uma API, e passa a controlar quem acessa a informação, quando acessão, qual tipo de informação você torna disponível, e ainda ganha uns pontos do mercado dos dados abertos.</p>
+<p>Para entender como uma API funciona, a metáfora do Matrix feita pelo <a href="%22https://www.curso-r.com/material/api/#header-o-que-e-uma-api%22">Curso-R</a> é excelente. Lembrem-se do filme Matrix. Os sobreviventes no mundo Matrix podiam conectar à uma maquina e pedir para aprender determinada habilidade - kung-fu, programação, língua, etc. Isso é exatamente o que uma API faz. Você conecta a site e pede dados, e recebe-os em retorno. É como enviar um email, porém fazendo tudo via linguagem de programação.</p>
+<div id="usos-de-api" class="section level2">
+<h2>Usos de API</h2>
+<p>Há duas formas principais em que nós acadêmicos comumente utilizamos APIs.</p>
+<ol style="list-style-type: decimal">
+<li>Acessar dados compartilhados por Empresas e ONGs</li>
+<li>Processar nossos dados em Algoritmos desenvolvidos por terceiros.</li>
+</ol>
+<p>A APIs hoje são a principal forma de compartilhamento de dados. Há muitas APIs disponíveis para acesso. Por exemplo, Twitter, Facebook, Spotify, Yelp, Portal da Transparência, IPEA.. a lista é longa. Veja abaixo.</p>
+<p><img src="api_growth.png" /></p>
+<p>E mais recentemente há diversas APIs sendo criadas para permitir análise de dados usando inteligência artificial. Por exemplo, você pode acessar o algoritmo do google para detectar <a href="https://www.perspectiveapi.com/#/home">agressividade em social mídia</a> via API O gráfico abaixo mostra essa tendência, ou para <a href="https://cloud.google.com/vision/">classificação de imagens</a>, ou para detectar <a href="https://serenata.ai/">gastos suspeitos</a> de políticos no Brasil.</p>
+<p>Vamos cobrir neste workshop somente o acesso a dados via APIs. Porém, fiquem de olho na segunda onda de inovações. Tudo se move muito rápido neste campo.</p>
+</div>
+<div id="uso-de-api-para-acesso-à-dados." class="section level2">
+<h2>Uso de API para acesso à dados.</h2>
+<p>Em seu formato mais simples, uma API é somente uma url. Veja o exemplo abaixo:</p>
+<p><a href="http://meusite.com/key?param_1;param_2" class="uri">http://meusite.com/key?param_1;param_2</a></p>
+<p>Principais elementos:</p>
+<ul>
+<li><strong><a href="http://meusite.com/" class="uri">http://meusite.com/</a></strong>: a base da API, chamado nas documentações de end-point.</li>
+<li><strong>key</strong>: as credenciais que muitos sites pedem - nem todos, como veremos.</li>
+<li><strong>?param_1;param_2</strong> parametros, ou filtros para refinar a busca da API.</li>
+</ul>
+<p>Com R, uma vez que temos as credenciais, podemos simplesmente usar os parâmetros que informam a API para nos fornecer os dados. Porém, existem muitos pacotes R para facilitar o acesso a determinadas APIs. Entender os parâmetros da acesso a API nem sempre é tarefa fácil, portanto, se algum desenvolvedor tiver escrito um pacote de R, sua vida será muito facilitada. Em resumo, o uso de APIs envolvem os seguintes passos:</p>
+<ol style="list-style-type: decimal">
+<li>Verificar se a API está disponível, e solicitar credenciais.</li>
+<li>Verificar se há um pacote de R disponível para acessar a API</li>
+<li>Ler a documentação da API, identificar a informações de seu interesse.</li>
+<li>Se existir um pacote de R, use-o.</li>
+<li>Se não existir, escreva seu código e limpe os dados.</li>
+</ol>
+</div>
+</div>
+<div id="fogo-cruzado-api" class="section level1">
+<h1>Fogo Cruzado API</h1>
+<p>Vamos começar como exemplo da API do Fogo Cruzado. O primeiro passo é verificar a existência da API, e solicitar credenciais. <a href="../../docs/prep_work.html">Aqui</a> eu descrevi para os participantes do workshop como solicitar essa credencial.</p>
+<div id="acessando-sua-senha" class="section level2">
+<h2>Acessando sua senha</h2>
+<pre class="r"><code># Pacotes para acessar APIs
+library(httr)
+library(jsonlite)
+library(tidyverse)
+
+# Solicitar a senha
+get_jwt &lt;- httr::POST(&quot;https://api.fogocruzado.org.br/api/v1/auth/login&quot;, query = list(email = &quot;venturat@umd.edu&quot;, 
+    password = &quot;xxxxxx&quot;))
+
+
+# Pegar a senha
+token &lt;- httr::content(get_jwt)$access_token
+
+# token = sua senha de acesso à API. Nao compartilhe por ai.</code></pre>
+<p>Agora que temos nossa credencial, vamos olhar a documentação da API. Neste link vocês encontrarão a documentação. Nela, podemos extrair as seguintes informações.</p>
+<div id="base-da-api" class="section level3">
+<h3>Base da API</h3>
+<p><img src="base_fogo_cruzado.png" /></p>
+</div>
+<div id="filtros-da-api" class="section level3">
+<h3>Filtros da API</h3>
+<p>A principal informação do site do fogo cruzado são as ocorrências de tiroteio no Rio de Janeiro e Recife. Na <a href="https://api.fogocruzado.org.br/docs/1.0/occurrences">documentação</a>, o ponto para acessar as ocorrências é simplesmente adicionas /occurrences na base da api. Vamos acessar nos primeira API</p>
+<pre class="r"><code># Passo 1. Crie a Url
+base_url &lt;- &quot;https://api.fogocruzado.org.br/api/v1&quot;
+occurences &lt;- &quot;/occurrences&quot;
+api &lt;- paste0(base_url, occurences)
+print(api)</code></pre>
+<pre><code>[1] &quot;https://api.fogocruzado.org.br/api/v1/occurrences&quot;</code></pre>
+<pre class="r"><code># Passo 2: Acesse a API
+
+response &lt;- GET(api, add_headers(Authorization = paste(&quot;Bearer&quot;, token, sep = &quot; &quot;)))
+
+# Qual o resultado?
+response</code></pre>
+<pre><code>Response [https://api.fogocruzado.org.br/api/v1/occurrences]
+  Date: 2019-12-15 20:46
+  Status: 200
+  Content-Type: application/json
+  Size: 18.9 MB</code></pre>
+<p>O retorno da API é um arquivo em JSON - que é um tipo mais eficiente para salvar arquivos grandes - e possui status 200 - que significa seu acesso funcionou. Vamos agora limpar esse arquivo JSON. Limpar arquivos de json pode ser complicado, por isso, vamos tocar somente a superficie aqui.</p>
+<pre class="r"><code># Converter para um json
+json_fogo_cruzado &lt;- content(response, as = &quot;text&quot;, encoding = &quot;UTF-8&quot;)</code></pre>
+<p>Isto é o que um arquivo de JSON parece. O código acima somente converte a conexão com a API para um longo texto. Esse texto possui separadores - muitas vezes hierarquicos - e chamamos esse arquivo de JSON. O pacote de R <code>rjson</code> permite-nos transformar este arquivo em um banco de dados</p>
+<p><img src="json-exemplo.png" /></p>
+<pre class="r"><code>output &lt;- fromJSON(json_fogo_cruzado) %&gt;% tibble::as_tibble()
+
+glimpse(output)</code></pre>
+<pre><code>Observations: 26,920
+Variables: 23
+$ id_ocorrencia                    &lt;int&gt; 8758, 10431, 10430, 16, 17, 1...
+$ local_ocorrencia                 &lt;chr&gt; &quot;Maré, Rio de Janeiro - RJ, B...
+$ latitude_ocorrencia              &lt;dbl&gt; -22.85750, -22.93538, -22.748...
+$ longitude_ocorrencia             &lt;dbl&gt; -43.24302, -43.19463, -43.410...
+$ data_ocorrencia                  &lt;chr&gt; &quot;2018-01-09 15:57:00&quot;, &quot;2018-...
+$ hora_ocorrencia                  &lt;chr&gt; &quot;15:57:00&quot;, &quot;20:54:00&quot;, &quot;18:3...
+$ presen_agen_segur_ocorrencia     &lt;int&gt; 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,...
+$ qtd_morto_civil_ocorrencia       &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+$ qtd_morto_agen_segur_ocorrencia  &lt;int&gt; 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,...
+$ qtd_ferido_civil_ocorrencia      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+$ qtd_ferido_agen_segur_ocorrencia &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+$ fonte_ocorrencia                 &lt;int&gt; 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,...
+$ estado_id                        &lt;int&gt; 19, 19, 19, 19, 19, 19, 19, 1...
+$ cidade_id                        &lt;int&gt; 3661, 3661, 3602, 3661, 3661,...
+$ nome_cidade                      &lt;chr&gt; &quot;Rio de Janeiro&quot;, &quot;Rio de Jan...
+$ cod_ibge_cidade                  &lt;int&gt; 3304557, 3304557, 3300456, 33...
+$ gentilico_cidade                 &lt;chr&gt; &quot;carioca&quot;, &quot;carioca&quot;, &quot;belfor...
+$ populacao_cidade                 &lt;int&gt; 6320446, 6320446, 469332, 632...
+$ area_cidade                      &lt;int&gt; 119746, 119746, 7782, 119746,...
+$ densidade_demo_cidade            &lt;chr&gt; &quot;5.27&quot;, &quot;5.27&quot;, &quot;6.03&quot;, &quot;5.27...
+$ nome_estado                      &lt;chr&gt; &quot;Rio de Janeiro&quot;, &quot;Rio de Jan...
+$ uf_estado                        &lt;chr&gt; &quot;RJ&quot;, &quot;RJ&quot;, &quot;RJ&quot;, &quot;RJ&quot;, &quot;RJ&quot;,...
+$ cod_ibge_estado                  &lt;int&gt; 33, 33, 33, 33, 33, 33, 33, 3...</code></pre>
+<p>Vamos adicionar alguns filtros ao nosso pedido. Para isso, devemos adicionar uma query de filtros na função GET. Estes filtros devem ser solicitados de acordo com a documentação da API.</p>
+<pre class="r"><code>query_list &lt;- list(presen_agen_segur_ocorrencia = &quot;1&quot;, uf_estado = &quot;RJ&quot;)
+
+
+response &lt;- GET(api, add_headers(Authorization = paste(&quot;Bearer&quot;, token, sep = &quot; &quot;)), 
+    query = query_list)
+
+output &lt;- jsonlite::fromJSON(httr::content(response, as = &quot;text&quot;, encoding = &quot;UTF-8&quot;)) %&gt;% 
+    tibble::as_tibble()</code></pre>
+</div>
+<div id="cidades-com-mais-ocorrências-no-rio-de-janeiro" class="section level3">
+<h3>Cidades com mais ocorrências no Rio de Janeiro</h3>
+<pre class="r"><code>output %&gt;% count(nome_cidade) %&gt;% top_n(10) %&gt;% arrange(n) %&gt;% ggplot(., aes(y = n, 
+    x = nome_cidade)) + geom_col() + theme_minimal() + coord_flip() + ylab(&quot;Tiroteios com Presença Policial&quot;) + 
+    xlab(&quot; Cidades do Rio de Janeiro&quot;)</code></pre>
+<p><img src="02_Apis_intro_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="visualização-com-mapas" class="section level3">
+<h3>Visualização com Mapas</h3>
+<p>Podemos visualizar essa informação com mapas. A função get_googlemap na verdade acessa a API do google maps e faz download do mapa do Rio de Janeiro. Para isso, você precisa liberar o seu acesso à API via google <a href="https://console.cloud.google.com">aqui</a>. Isso fica como um exercício para o futuro.</p>
+<pre class="r"><code>library(ggmap)
+library(RColorBrewer)
+
+
+ggmap(get_googlemap(&quot;rio de janeiro&quot;, zoom = 11, maptype = &quot;roadmap&quot;, scale = 2)) + 
+    geom_point(data = output, aes(x = longitude_ocorrencia, y = latitude_ocorrencia), 
+        color = &quot;tomato2&quot;, alpha = 0.8, size = 0.3)</code></pre>
+<p><img src="02_Apis_intro_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+</div>
+<div id="but-nós-chechamos-se-havia-algum-pacote-de-r-disponível-para-o-fogo-cruzado" class="section level2">
+<h2>But! Nós chechamos se havia algum pacote de R disponível para o Fogo Cruzado?</h2>
+<p>Uma das maiores vantagens do uso de R reside no fato de se tratar de uma linguagem gratuita e de código aberto. Como resultado, há milhares de programadores trabalhando em desenvolver pacotes e tornando-os acessíveis ao público. Há dois lugares onde esses pacotes são hospedados. O repositório oficial do R chamado CRAN, ou no github - um local onde programadores tornam seus códigos disponíveis.</p>
+<p>Se alguem tiver desenvolvido um pacote para acessar a API, você vai ganhar muito tempo usando o pacote diretamente, ao invés de entender toda a documentação da API, como fizemos. Vamos buscar o pacote de R para acessar o Fogo Cruzado.</p>
+<p>Este <a href="https://github.com/voltdatalab/crossfire">link</a> contém o site do pacote de R, e as recomendações de como utilizá-lo. Como disse, o pactoe está no github. Segue a instalação:</p>
+<pre class="r"><code># Instalação do pacote
+install.packages(&quot;devtools&quot;)  # pacote para acessar o github
+devtools::install_github(&quot;voltdatalab/crossfire&quot;)</code></pre>
+<pre class="r"><code>library(crossfire)
+
+# Registra usuario e senha, e envia sua senha da API
+
+fogocruzado_signin(email = &quot;venturat@umd.edu&quot;, password = &quot;ptds42420678&quot;)
+
+# Extrair os dados que pegamos manualmente antes
+
+fogocruzado_rj &lt;- get_fogocruzado(state = &quot;RJ&quot;, security_agent = 1)
+
+# Colocar em gráfico mais uma vez.
+
+ggmap(get_googlemap(&quot;rio de janeiro&quot;, zoom = 11, maptype = &quot;roadmap&quot;, scale = 2)) + 
+    geom_point(data = fogocruzado_rj, aes(x = longitude_ocorrencia, y = latitude_ocorrencia), 
+        alpha = 0.8, size = 0.5, color = &quot;darkred&quot;)</code></pre>
+<p><img src="02_Apis_intro_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Muito mais fácil!</p>
+</div>
+<div id="congressbr" class="section level2">
+<h2>Congressbr</h2>
+<p>Para terminar o dia de hoje, vamos praticar um pouco mais com o excelente pacote <a href="%22https://github.com/duarteguilherme/congressbr%22">congressbr</a>. Este <a href="https://larrlasa.org/article/10.25222/larr.447/?fbclid=IwAR1vKKEpLWufTtuIA6LI_LNqsYJUXEbNnK8oDRHEJRG0E4LTRsXmJnseVRA">artigo</a> sobre o pacote oferece uma excelente introdução à como utilizá-lo, e um sumário de outros pacotes para facilitar acesso à APIs com dados brasileiros.</p>
+<pre class="r"><code># Instale o pacote
+
+install.packages(&quot;congressbr&quot;)
+devtools::install_github(&quot;RobertMyles/congressbr&quot;)</code></pre>
+<p>O pacote permite o acesso às APIs da <a href="https://www2.camara.leg.br/transparencia/dados-abertos/dados-abertos-legislativo">Câmara</a> e do <a href="https://www2.camara.leg.br/transparencia/dados-abertos/dados-abertos-legislativo">Senado</a>. Há quatro funções principais no pacote</p>
+<ul>
+<li>cham_votes(): retorna informação sobre votações na Câmara.</li>
+<li>cham_bills(): retorna informação sobre atividade legislativa na Câmara.</li>
+<li>sen_votes(): retona informação de voto no Senado.</li>
+<li>sen_bill_search(): Procura por atividade legislativa no Senado.</li>
+</ul>
+<p>Caso você queira entender mais sobre cada uma das funções, há alguns caminhos. Em primeiro lugar, procure a documentação da API. Em segundo, leia a <a href="%22https://cran.r-project.org/web/packages/congressbr/congressbr.pdf%22">documentação</a> do pacote ou a sua <a href="https://github.com/duarteguilherme/congressbr">página no github</a>. Outra opção, é pedir ajuda para entender a função de seu interesse.</p>
+<p>Vamos ver algumas das funções do pacote abaixo. Em primeiro lugar, darei um exemplo de como pedir ajudar, e entender a função.</p>
+<pre class="r"><code>library(congressbr)
+
+# Ajuda em R
+`?`(cham_legislator_list)</code></pre>
+<p><img src="helpr.png" /></p>
+<p>Essa imagem irá aparecer diretamente no seu R Studio. Ela explica o que a função faz, o que retorna, e exemplo de como utilizá-la. Somente de copiar e colar o exemplo, você já terá uma boa dimensão da função.</p>
+<pre class="r"><code>all &lt;- cham_legislator_list()
+glimpse(all)</code></pre>
+<pre><code>Observations: 513
+Variables: 13
+$ legislator_id               &lt;chr&gt; &quot;73701&quot;, &quot;73696&quot;, &quot;73801&quot;, &quot;74848&quot;...
+$ legislator_status           &lt;chr&gt; &quot;Titular&quot;, &quot;Titular&quot;, &quot;Titular&quot;, &quot;...
+$ legislator_name             &lt;chr&gt; &quot;BENEDITA SOUZA DA SILVA SAMPAIO&quot;,...
+$ legislator_cham_name        &lt;chr&gt; &quot;BENEDITA DA SILVA&quot;, &quot;ANGELA AMIN&quot;...
+$ legislator_photo_url        &lt;chr&gt; &quot;http://www.camara.gov.br/internet...
+$ legislator_gender           &lt;chr&gt; &quot;feminino&quot;, &quot;feminino&quot;, &quot;masculino...
+$ legislator_state            &lt;chr&gt; &quot;RJ&quot;, &quot;SC&quot;, &quot;PE&quot;, &quot;RJ&quot;, &quot;PI&quot;, &quot;PR&quot;...
+$ legislator_party            &lt;chr&gt; &quot;PT&quot;, &quot;PP&quot;, &quot;PCdoB&quot;, &quot;PCdoB&quot;, &quot;PP&quot;...
+$ legislator_cabinet          &lt;chr&gt; &quot;330&quot;, &quot;252&quot;, &quot;915&quot;, &quot;622&quot;, &quot;640&quot;,...
+$ legislator_building_address &lt;chr&gt; &quot;4&quot;, &quot;4&quot;, &quot;4&quot;, &quot;4&quot;, &quot;4&quot;, &quot;4&quot;, &quot;4&quot;,...
+$ legislator_telephone_number &lt;chr&gt; &quot;3215-5330&quot;, &quot;3215-5252&quot;, &quot;3215-59...
+$ legislator_email            &lt;chr&gt; &quot;dep.beneditadasilva@camara.leg.br...
+$ legislator_comissions       &lt;chr&gt; &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;...</code></pre>
+<p>Abaixo, vou dar alguns exemplos de uso do pacote.</p>
+<div id="número-de-proposições-por-ano" class="section level3">
+<h3>Número de Proposições por ano</h3>
+<pre class="r"><code>ano &lt;- c(2002:2018)
+
+proposicoes &lt;- map(ano, ~cham_plenary_bills(.x) %&gt;% mutate(ano = .x))
+
+# Vamos combinar tudo
+
+proposicoes &lt;- bind_rows(proposicoes)
+
+# Eliminar repeticoes
+
+proposicoes &lt;- proposicoes %&gt;% distinct()
+
+# Agregar por ano
+
+proposicoes_ano &lt;- proposicoes %&gt;% count(ano)
+
+# Marcar anos pre eleitorais
+proposicoes_ano &lt;- proposicoes_ano %&gt;% mutate(ano_eleitoral = ifelse(ano == 
+    2002 | ano == 2006 | ano == 2010 | ano == 2014 | ano == 2018, &quot;Ano Eleitoral&quot;, 
+    &quot;Ano Não Eleitoral&quot;))
+
+ggplot(proposicoes_ano, aes(y = n, x = ano, fill = ano_eleitoral)) + geom_col() + 
+    scale_fill_manual(name = &quot;&quot;, values = c(&quot;darkred&quot;, &quot;darkblue&quot;)) + theme_minimal() + 
+    xlab(&quot;ano&quot;) + ylab(&quot;Proposições Votadas&quot;)</code></pre>
+<p><img src="02_Apis_intro_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Mais uma vez. O pacote permite fácil e rápido acesso a uma quantidade enorme de dados. Basta nós cientistas sociais aprendermos como utilizar-los.</p>
+</div>
+</div>
+</div>
+<div id="exercício-1" class="section level1">
+<h1>Exercício 1</h1>
+<ol style="list-style-type: decimal">
+<li><p>Encontre uma API com um pacote de R escrito. Instale o pacote, e utilize-o corretamente. A <a href="http://www.ipeadata.gov.br/Default.aspx">API do Ipea</a> pode ser uma opção, ou esse <a href="https://cran.r-project.org/web/packages/GetLattesData/vignettes/gld_vignette-ReadLattes.html">pacote</a> para acessar dados do Lattes, <a href="https://github.com/mkearney/nytimes">new york times</a>, ou a congressbr são boas opções.</p></li>
+<li>Encontre uma API para você praticar o use da função GET. Pode ser qualquer uma. A guisa de sugestão, você pode utilizar a API do <a href="http://www.portaltransparencia.gov.br/api-de-dados">Portal da Transparência</a>. É bem simples de acessar.</li>
+</ol>
+<ul>
+<li>Dica 1 : Escolha o tema, e vá em tentar agora. Depois que você encontrar o resultado, basta copiar para o R.</li>
+<li>Dica 2 : a url base é <a href="http://www.transparencia.gov.br/api-de-dados/" class="uri">http://www.transparencia.gov.br/api-de-dados/</a></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Colete uma informação desta API. Qualquer uma. Faça um GET que retorne um resultado interessante</li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

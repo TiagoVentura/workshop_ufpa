@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Acessando APIs: Estudo de Caso do Twitter</title>
+
+<script src="02_Apis_twitter_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="02_Apis_twitter_files/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="02_Apis_twitter_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="02_Apis_twitter_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="02_Apis_twitter_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="02_Apis_twitter_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="02_Apis_twitter_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="02_Apis_twitter_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="02_Apis_twitter_files/navigation-1.1/tabsets.js"></script>
+<link href="02_Apis_twitter_files/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="02_Apis_twitter_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Acessando APIs: Estudo de Caso do Twitter</h1>
+
+</div>
+
+
+<div id="acessando-a-api-do-twitter." class="section level1">
+<h1>Acessando a API do Twitter.</h1>
+<p>A API do Twitter deve ser uma das mais utilizadas por cientistas sociais. A quantidade de papers usando dados de twitter é incrível. Neste código, vamos aprender a acessar, coletar e analisar dados do Twitter.</p>
+</div>
+<div id="introdução-às-apis-do-twitter" class="section level1">
+<h1>Introdução às APIs do Twitter</h1>
+<p>O Twitter possui duas APIs, que resultam em duas formas diferentes de coletar dados. A API REST dá acesso à tweets até sete dias atrás, e a Streaming API dá acesso a tweets que estão sendo produzidos no referido momento. O acesso à REST API se dá via endpoint search, enquanto o streaming ocorre via endpoint filter. Todos os pacotes de R que acessam a API do Twitter usam estes dois termos para especificar o tipo de busca.</p>
+</div>
+<div id="credenciais" class="section level1">
+<h1>Credenciais</h1>
+<p>O primeiro passo é autenticar pegar suas credenciais para acessar as APIs do Twitter. Na aba <a href="prep_workshop.html">Preparação para o Workshop</a> há um tutorial de como solicitar suas credenciais. Em geral, o processo pode durar um ou dois dias, a depender das perguntas extras que o Twitter irá enviar por email.</p>
+<p>Seguindo todos os passos para solicitar a conta de desenvolvedor, o nome do seu app no site do twitter developer aparecerá no canto direito superior da sua tela. Em seguida, basta seguir o link e acessar as credenciais. Há quatro credenciais diferentes, e a melhor forma de acessá-las é criando um objeto de R com seus nomes.</p>
+<pre class="r"><code>app_name &lt;- &quot;seu_app_name&quot;
+consumer_key &lt;- &quot;seu_consumer_key&quot;
+consumer_secret &lt;- &quot;seu_consumer_secret&quot;
+access_token &lt;- &quot;seu_acess_token&quot;
+access_token_secret &lt;- &quot;seu_token_secret&quot;</code></pre>
+<p>Para acessar a API, iremos utilizar o pacote <code>rtweet</code>. Há diversos outros pacotes para acessar a API do Twitter. Um outro favorito meu se chama ‘Twarc’ em Python. Escolha o que pacote que vocÊ julgar mais intuitivo para sua dinâmica de trabalho.</p>
+<pre class="r"><code># Faça o download do pacote
+library(devtools)
+install_github(&quot;mkearney/rtweet&quot;)</code></pre>
+<p>Em seguida, diga ao pacote quais são suas credenciais</p>
+<pre class="r"><code>library(rtweet)
+create_token(app = app_name, consumer_key = consumer_key, consumer_secret = consumer_secret, 
+    access_token = access_token, access_secret = access_token_secret)</code></pre>
+<pre><code>&lt;Token&gt;
+&lt;oauth_endpoint&gt;
+ request:   https://api.twitter.com/oauth/request_token
+ authorize: https://api.twitter.com/oauth/authenticate
+ access:    https://api.twitter.com/oauth/access_token
+&lt;oauth_app&gt; RetornoBot
+  key:    P9YRPFk4ACqJktsbL8RtyhVNu
+  secret: &lt;hidden&gt;
+&lt;credentials&gt; oauth_token, oauth_token_secret
+---</code></pre>
+<div id="search-tuítes-últimos-sete-dias" class="section level3">
+<h3>Search Tuítes (Últimos Sete Dias)</h3>
+<pre class="r"><code>bolsonaro_tweets &lt;- search_tweets(&quot;Bolsonaro&quot;, n = 100, include_rts = FALSE)</code></pre>
+</div>
+<div id="filter-tweets-live-time" class="section level3">
+<h3>Filter Tweets: Live-time</h3>
+<pre class="r"><code>bolsonaro_tweets &lt;- stream_tweets(&quot;Bolsonaro&quot;, n = 100, include_rts = FALSE)
+bolsonaro_tweets$text[1]</code></pre>
+<pre><code>[1] &quot;BOOM!! Bolsonaro called Greta Thunberg a SNOTTY BRAT &amp;amp; shames the MSM for giving her so much attention!!\n\nThey hate him almost as much as Trump &amp;amp; he couldn&#39;t care a less!&lt;U+0001F64C&gt;&lt;U+0001F62D&gt;&lt;U+0001F62D&gt;&lt;U+0001F62D&gt;&lt;U+0001F62D&gt;&lt;U+0001F62D&gt;&lt;U+0001F62D&gt;&lt;U+0001F62D&gt;&lt;U+0001F62D&gt;&lt;U+0001F62D&gt; https://t.co/BQgWPV7bHd&quot;</code></pre>
+</div>
+<div id="selecione-trending-topics" class="section level3">
+<h3>Selecione Trending Topics</h3>
+<pre class="r"><code>tt &lt;- get_trends(&quot;Brazil&quot;)
+tt$trend[1:10]</code></pre>
+<pre><code> [1] &quot;Paulo Freire&quot;       &quot;#BemVindoLeo&quot;       &quot;#fsradiobrasil&quot;    
+ [4] &quot;UFRGS&quot;              &quot;Coudet&quot;             &quot;#BBDebate&quot;         
+ [7] &quot;#ApologizeToChuu&quot;   &quot;#CarburadorDePrata&quot; &quot;SOMOS TODOS THIAGO&quot;
+[10] &quot;Maurício Mattar&quot;   </code></pre>
+</div>
+<div id="acessar-tuítes-por-usuário" class="section level3">
+<h3>Acessar tuítes por usuário</h3>
+<p>Vamos acessar as timelines dos deputados do Pará. Usaremos o banco de dados que criamos ontem para isso.</p>
+<pre class="r"><code>library(tidyverse)
+
+deputados &lt;- read_csv(&quot;C:/Users/Tiago Ventura/Dropbox/webscraping_workshop_ufpa/html/dia_01/deputados_para.csv&quot;)
+
+# Seleciado os que possuem twitter
+
+deputados_twitter &lt;- deputados %&gt;% filter(!is.na(twitter))
+
+
+# Vamos extrair somente as tags
+names &lt;- str_remove_all(deputados_twitter$twitter, &quot;https://www.twitter.com/|https://twitter.com/&quot;)
+names</code></pre>
+<pre><code> [1] &quot;DepAlexSantiago&quot; &quot;bordalopt&quot;       &quot;cilenecouto&quot;    
+ [4] &quot;CaveiraDelegado&quot; &quot;dilvandafaroPT&quot;  &quot;dilvandafaroPT&quot; 
+ [7] &quot;dirceutencaten&quot;  &quot;doutordanielpa&quot;  &quot;drjaques&quot;       
+[10] &quot;elielfaustino10&quot; &quot;igornormando&quot;    &quot;marinorbrito&quot;   
+[13] &quot;depcarmona&quot;      &quot;deprsantos&quot;      &quot;deputadothiago&quot; </code></pre>
+<p>Vamos capturar os tweets. Começaremos com o deputado Alex Santiago.</p>
+<pre class="r"><code>dep1_tweets &lt;- get_timelines(names[1], n = 5)
+head(dep1_tweets$text)</code></pre>
+<pre><code>[1] &quot;A convite da comunidade evangélica dirigida pelo pastor Benedito e missionária Valdenuza, participamos do Culto Especial em homenagem ao dia internacional das mulheres, realizado na Assembléia de Deus, CIADSETA-PA/MT, em Floresta do Araguaia. https://t.co/HAPvVc3gBp&quot; 
+[2] &quot;Estive em Belém na sede da UEPA - Universidade Estadual do Pará, com o reitor Dr. Rubens Cardoso, juntamente com o reitor do Campus de  Redenção Dr. Renato Carr, na oportunidade destacamos a importância da implantação do Campus em Parauapebas! https://t.co/flap8vM7lI&quot;</code></pre>
+<p>Há um limite de 3.200 tweets por timeline. O que significa que não é possível capturar todas as informações daqueles usuários muito ativos no Twitter. Vamos pegar informações sobre o perfil deste deputado.</p>
+<pre class="r"><code>dep1_usuarios &lt;- lookup_users(names[1])
+dep1_usuarios$screen_name</code></pre>
+<pre><code>[1] &quot;DepAlexSantiago&quot;</code></pre>
+<p>Quais tweets o deputado curtiu recentemente?</p>
+<pre class="r"><code>dep1_favorites &lt;- get_favorites(names[1], n = 5)
+dep1_favorites$text</code></pre>
+<pre><code>NULL</code></pre>
+<p>Quem o deputado segue?</p>
+<pre class="r"><code>dep1_seguidores &lt;- get_followers(names[1])
+dep1_seguidores</code></pre>
+<pre><code># A tibble: 77 x 1
+   user_id            
+   &lt;chr&gt;              
+ 1 1192018480427606016
+ 2 1178495030702592001
+ 3 26397382           
+ 4 2379079912         
+ 5 837784260593520641 
+ 6 1175957802436714496
+ 7 2295381927         
+ 8 1093086549825208321
+ 9 3344298503         
+10 1163997233886482435
+# ... with 67 more rows</code></pre>
+</div>
+<div id="postar-tuites" class="section level3">
+<h3>Postar Tuites</h3>
+<p>Por fim, é possível utilizar o <code>rtweet</code> para postar mensagens no Twitter a partir do R. Esta possibilidade tem permitido diversas pesquisas super interessantes usando robôs no twitter em desenhos experimentais. Este <a href="https://osf.io/preprints/socarxiv/4ygux">artigo</a> de Chris Bail e co-autores, e este <a href="https://link.springer.com/article/10.1007%2Fs11109-016-9373-5">artigo</a> de Kevin Munger estão na minha lista de favoritos. Em minha opinião, qualquer aplicação deste tipo daria uma excelente publicação no Brasil.</p>
+<pre class="r"><code>post_tweet(&quot;Eu estou postando esse tweet a
+           partir do pacote rtweet para
+            mostrar aos alunos da UFPA 
+           o incrível mundo do R&quot;)</code></pre>
+</div>
+<div id="analizando-a-time-line-dos-deputados-do-pará" class="section level2">
+<h2>Analizando a Time Line dos Deputados do Pará</h2>
+<p>Para demonstrar possíveis análises com dados de Twitter, vamos praticas com algumas técnicas simples e descritivas de análise computacional de texto usando o pacote de R <code>quanteda</code>. Coletaremos as timelines dos deputados do Pará, utilizando o arquivo de .csv que criamos ontem depois de fazer a raspagem no site da ALEPA.</p>
+<div id="coletar-tweets" class="section level3">
+<h3>Coletar Tweets</h3>
+<pre class="r"><code>text &lt;- map(names, ~get_timelines(.x, n = 3000))</code></pre>
+<p>Vamos agora separar somente com o texto e nome de cada deputado.</p>
+<pre class="r"><code># Combinar todos
+
+tweets &lt;- bind_rows(text) %&gt;% select(screen_name, text)
+
+tweets</code></pre>
+<pre><code># A tibble: 18,661 x 2
+   screen_name     text                                                    
+   &lt;chr&gt;           &lt;chr&gt;                                                   
+ 1 DepAlexSantiago A convite da comunidade evangélica dirigida pelo pastor~
+ 2 DepAlexSantiago Estive em Belém na sede da UEPA - Universidade Estadual~
+ 3 bordalopt       &quot;A bancada do PT na @Alepa_com apresentou emenda à PEC ~
+ 4 bordalopt       Gratidão por um ano incrível. #2019PodcasterWrapped htt~
+ 5 bordalopt       A proposta fará que o consumidor tenha mais um instrume~
+ 6 bordalopt       &quot;Em celebração ao dia Internacional dos Direitos Humano~
+ 7 bordalopt       Inclusão é um direito humano fundamental. https://t.co/~
+ 8 bordalopt       &quot;A entrega da medalha Paulo Frota de Direitos Humanos t~
+ 9 bordalopt       &quot;A Comissão de Direitos Humanos da Alepa homenageia, ho~
+10 bordalopt       Um dos homenageados é o grupo Mundo Azul, de mães e pai~
+# ... with 18,651 more rows</code></pre>
+<p>Em geral, quando fazemos análise de texto, iniciamos criando o corpus de textos que iremos utilizar. O Corpus é somente uma forma mais eficiente de armazenar textos em R</p>
+<pre class="r"><code>library(quanteda)
+library(tidytext)
+
+# Crie um corpus de textos
+corpus &lt;- corpus(tweets$text)
+docvars(corpus) &lt;- data_frame(deputados = tweets$screen_name)
+
+
+# Limpe os textos com palavras que importam pouco para a analise Crie uma
+# Document-Feature Matrix
+
+
+palavras &lt;- c(&quot;https&quot;, &quot;t.co&quot;, &quot;http&quot;)
+
+dfm &lt;- tokens(corpus, remove_punct = TRUE, remove_numbers = TRUE, remove_symbols = TRUE) %&gt;% 
+    tokens_select(., min_nchar = 3L) %&gt;% tokens_remove(., c(stopwords(&quot;pt&quot;), 
+    palavras)) %&gt;% dfm()
+
+summary(dfm)</code></pre>
+<pre><code>   Length     Class      Mode 
+706916002       dfm        S4 </code></pre>
+<p>Nós acabamos de criar um objeto chamado Document-Feature Matrix. Esta é a forma mais comum para fazer anáilse de texto. É uma matrix em que nas linhas você tem o documento, e nas colunas as palavras do seu conjunto de textos. Cada entrada é o número de vezes que a palavra aparece na linha. Vamos visualizar nosso texto usando algumas funções do pacote <code>quanteda</code>.</p>
+</div>
+<div id="nuvem-de-palavras" class="section level3">
+<h3>Nuvem de Palavras</h3>
+<pre class="r"><code>textplot_wordcloud(dfm)</code></pre>
+<p><img src="02_Apis_twitter_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="frequência" class="section level3">
+<h3>Frequência</h3>
+<pre class="r"><code>features_dfm &lt;- textstat_frequency(dfm, n = 50)
+
+# Sort by reverse frequency order
+features_dfm$feature &lt;- with(features_dfm, reorder(feature, -frequency))
+
+ggplot(features_dfm, aes(x = feature, y = frequency)) + geom_point(shape = 21, 
+    size = 3, fill = &quot;darkred&quot;) + theme(axis.text.x = element_text(angle = 90, 
+    hjust = 1)) + theme_minimal() + coord_flip()</code></pre>
+<p><img src="02_Apis_twitter_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="frequencia-por-grupos" class="section level3">
+<h3>Frequencia por Grupos</h3>
+<pre class="r"><code># Get frequency grouped by president
+
+freq_grouped &lt;- textstat_frequency(dfm, groups = &quot;deputados&quot;)
+
+# Filter the term &#39;american&#39;
+freq_bolsonaro &lt;- subset(freq_grouped, freq_grouped$feature %in% &quot;bolsonaro&quot;)
+
+
+ggplot(freq_bolsonaro, aes(x = group, y = frequency)) + geom_point(shape = 21, 
+    size = 3, fill = &quot;darkred&quot;) + xlab(NULL) + ylab(&quot;Frequency&quot;) + theme(axis.text.x = element_text(angle = 90, 
+    hjust = 1)) + theme_minimal(base_size = 16) + coord_flip()</code></pre>
+<p><img src="02_Apis_twitter_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+<div id="tópicos" class="section level3">
+<h3>Tópicos</h3>
+<p>Agora, vamos entrar um pouco no uso de modelos de machine learning para analisar textos. Este <a href="https://web.stanford.edu/~jgrimmer/tad2.pdf">artigo</a> escrito por Justing Grimmer e Brandon Stewart é uma excelente introdução a modelos de análise de texto. Vamos usar aqui um método chamado Tópic Models.</p>
+<p>Não entrarei aqui na parte estatística por trás deste modelo. Case se interessem, ler o <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12103">artigo</a> de Molly Roberts e co-autores. Em resumo, este modelo busca identificar clusters de palavras em cada documento. Não há nenhum input no modelo, o algoritmo basicamente identifica quais palavras costumam aparecer com maior frequência nos mesmos documentos.</p>
+<pre class="r"><code># Para estimar os modelos de tópicos, vamos usar o pacote de R `STM`.  Este
+# pacote exige uma pequena transformação no objeto
+library(stm)
+dfm_stm &lt;- quanteda::convert(dfm, to = &quot;stm&quot;)
+
+model_parag &lt;- stm(dfm_stm$documents, dfm_stm$vocab, K = 5, data = dfm_stm$meta, 
+    init.type = &quot;Spectral&quot;, verbose = FALSE)
+
+# Topicos
+labelTopics(model_parag)</code></pre>
+<pre><code>Topic 1 Top Words:
+     Highest Prob: estado, hoje, bote, pará, reunião, alepa, sessão 
+     FREX: bote, reunião, marabá, legislativa, comissão, paraense, lideranças 
+     Lift: #30m, #acessoasaude, #agenda, #ananindeua, #audienciapublica, #carnabase, #cidadania 
+     Score: bote, reunião, marabá, sessão, legislativa, município, alepa 
+Topic 2 Top Words:
+     Highest Prob: lula, marinor, ser, vai, todos, brasil, agora 
+     FREX: lula, ter, moro, porque, vou, deve, nunca 
+     Lift: @jimmynight, acho, antes, cabeça, defender, deixar, dizer 
+     Score: lula, ser, moro, temer, país, amor, ter 
+Topic 3 Top Words:
+     Highest Prob: sobre, governo, programa, contra, brasil, vivo, leia 
+     FREX: programa, vivo, blog, rádio, liberdade, senado, variedades 
+     Lift: #botafogo, #boulosnaredetv, #celpa, #chegadeimpunidadebarcarena, #cinema, #códigoflorestal, #cpi 
+     Score: variedades, vivo, sobre, rádio, programa, contra, liberdade 
+Topic 4 Top Words:
+     Highest Prob: dia, bom, hoje, deus, todos, amigos, amig@s 
+     FREX: dia, bom, deus, amig@s, boa, noite, feliz 
+     Lift: desejo, #108anos, #14desetembro, #15deoutubro, #2019podcasterwrapped, #25anos, #42anosdevitórias 
+     Score: dia, bom, deus, amig@s, amigos, irmãos, ieq 
+Topic 5 Top Words:
+     Highest Prob: pará, belém, projeto, nova, foto, trabalho, facebook 
+     FREX: belém, nova, foto, facebook, publiquei, frente, acabou 
+     Lift: #14jgrevegeral, #1deabril, #bolsonaroday, #democracia, #doutordaniel, #elenunca, #empoderamentofeminino 
+     Score: facebook, publiquei, belém, projeto, foto, pará, publicar </code></pre>
+<pre class="r"><code># Visualizar
+plot(model_parag)</code></pre>
+<p><img src="02_Apis_twitter_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Estes modelos são super úteis quando pesquisadores querem entender de forma mais descritiva as estruturas por trás dos textos. Os resultados aqui não estariam prontos para uma análise porque há diversas coisas ainda para ajustar nos modelos – número de tópicos, coletar mais dados, limpar melhor os textos – porém fica como uma ferramenta para o uso de vocês no futuro.</p>
+</div>
+</div>
+<div id="exercícios." class="section level2">
+<h2>Exercícios.</h2>
+<ol style="list-style-type: decimal">
+<li><p>Colete dados do Twitter sobre um tópico de seu interesse.</p></li>
+<li><p>Apresente uma análise interessante sobre esses dados. Pode ser uma nuvem de palavra, um gráfico de frequência, fique a vontade.</p></li>
+</ol>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

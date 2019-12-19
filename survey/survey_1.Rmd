@@ -1,0 +1,94 @@
+---
+title: "Acessando Dados da Web em R"
+subtitle: "Raspagem de Dados em Webpages"
+author: Tiago Ventura |
+        venturat@umd.edu
+institute: 
+   - University of Maryland, College Park
+output: 
+  beamer_presentation:
+    keep_tex: false
+    theme: metropolis
+    slide_level: 2 
+    incremental: false
+    highlight: zenburn 
+fontsize: 10pt
+classoption: compress
+header-includes: 
+  - \usepackage{booktabs}
+  - \usepackage{amsmath}
+  - \usepackage{lmodern}
+  - \usepackage[shadow,roundedcorners,customcolors]{dynblocks}
+  - \usepackage{natbib}
+  - \definecolor{redtiago}{HTML}{e13d3d}
+  - \definecolor{background}{HTML}{fbf9f4}
+  - \setbeamercolor{section title}{fg=darkgray,bg=red!50!black}
+  - \setbeamercolor{frametitle}{fg=white, bg=darkgray}
+  - \setbeamercolor{normal text}{bg=background, fg=darkgray}
+  - \setbeamercolor{alerted text}{fg=redtiago, bg=redtiago}
+  - \setbeamercolor{example text}{fg=redtiago, bg=redtiago}
+  - \setbeamercolor{progress bar}{fg=redtiago}
+  - \definecolor{links}{HTML}{e13d3d}
+  - \hypersetup{colorlinks,linkcolor=redtiago,urlcolor=redtiago,citecolor=blue}
+  - \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+editor_options: 
+  chunk_output_type: console
+---
+```{r setup, include=FALSE, eval=FALSE}
+
+knitr::opts_chunk$set(prompt=FALSE,
+                      tidy=TRUE,
+                      comment=NA,
+                      message=FALSE,
+                      warning=FALSE, 
+                      cache=TRUE)
+
+knitr::options(Encoding="UTF-8")
+
+```
+
+# Survey I
+
+## O que você mais gostou?
+
++ Explicação super didática sobre como funciona a raspagem de dados
+
++ O potencial da plataforma R
+
++ Foram muitas descobertas novas, que com certeza com a prática irei conseguir dá andamento na minha base de dados. E o material está muito bem organizado.
+
+## O que você menos gostou?
+
++ Atraso em começar
+
++ Na questão da estrutura, ja que infelizmente alguns computadores não rodam o programa
+
++ A explicação foi muito rápida
+
++ O tempo que não tem está a nosso favor.
+
+## O que você acha que deveria mudar?
+
++ Uso do RStudio Cloud para evitar os problemas do R/RStudio localmente.
+
++ Um material de preparação com um passo-a-passo mais detalhado, para aqueles sem experiência em programação
+ 
++ Meter mais a mão na massa, cada pessoa tentar fazer a raspagem etc
+
++ ser mais devagar um pouco
+
+
+## Planos para hoje
+
+1. Finalizar sites estáticos (30 min)
+
+2. Rodar programas de R juntos (30-45 minutos)
+
+3. Intervalo (20 min)
+
+4. Acessar APIs (2 horas)
+
+
+
+
+ 

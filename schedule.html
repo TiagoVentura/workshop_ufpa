@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Programação do Workshop</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Acessando Dados da Web em R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Introdução</a>
+</li>
+<li>
+  <a href="prep_work.html">Preparação para o Workshop</a>
+</li>
+<li>
+  <a href="schedule.html">Módulos</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/TiagoVentura/workshop_ufpa">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/_tiagoventura">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Programação do Workshop</h1>
+
+</div>
+
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="Dia 0" class="panel-title">
+<a data-toggle="collapse" href="#collapse1">Dia 0: Introdução ao R e a Computational Social Science </a>
+</h2>
+</div>
+<div id="collapse1" class="panel-collapse collapse in" style="margin:12px">
+<p>
+<b>Tópicos:</b> Introdução ao Curso.
+</p>
+<ul>
+<li><a href="./html/dia_00/introducao.pdf">Slides(.pdf)</a></li>
+</ul>
+<p>
+<b>Tópicos:</b> Introdução ao R e Rstudio.
+</p>
+<ul>
+<li><p><a href="./html/dia_00/crash_course_ufpa.pdf">Slides(.pdf)</a></p></li>
+<li><p><a href="./html/dia_00/crash_course_gvpt.html">Códigos e Explicações (.rmd)</a></p></li>
+<li><p><a href="./html/dia_00/crash_course_gvpt.R">Código em R</a></p></li>
+</ul>
+<h4>
+Algumas outras introduções ao R
+</h4>
+<ul>
+<li><p><a href="http://tiagoventura.rbind.io/files/crash_course_gvpt/">Curso Rápido em R</a></p></li>
+<li><p><a href="http://tiagoventura.rbind.io/files/gsa_tidyverse_workshop/">Introdução ao Tidyverse</a></p></li>
+<li><a href="https://www.datacamp.com/">Datacamp</a>.</li>
+<li>Hadley Wickham’s <a href="http://r4ds.had.co.nz/">aqui</a> e <a href="https://adv-r.hadley.nz/">aqui</a></li>
+<li>O excelente <a href="https://www.curso-r.com/">Curso-R</a></li>
+<li><p><a href="https://swirlstats.com/">Swirl</a></p></li>
+</ul>
+<h4>
+Algumas indicações de leituras mais téoricas
+</h4>
+<ul>
+<li><p><a href="%22http://www.bitbybitbook.com/en/ethics/%22">Matt Salganik. Bit by Bit: Social Research in the Digital Age.</a> Princeton, NJ: Princeton University Press</a></p></li>
+<li><p><a href="https://www.cambridge.org/core/journals/ps-political-science-and-politics/article/big-data-causal-inference-and-formal-theory-contradictory-trends-in-political-science/33238DE3FAF1DCB44444811662DAB995">Big Data, Causal Inference, and Formal Theory: Contradictory Trends in Political Science?: Introduction</a></p></li>
+<li><p><a href="https://web.stanford.edu/~jgrimmer/tad2.pdf">Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-2" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Dia 1: Raspagem de Dados - Introdução </a>
+</h2>
+</div>
+<div id="collapse2" class="panel-collapse collapse in" style="margin:12px">
+<p>
+<b>Tópicos:</b> Como raspar acessar tabelas? Como extrair informações de forma automática? Como limpar dados desorganizados? Como análisar textos?
+</p>
+<p>
+<a href="html/dia_01/01_raspagem_apresentacao.pdf">SLIDES (.pdf): Raspagem de dados em sites estáticos </a>
+</p>
+<p>
+<a href="html/dia_01/01_raspagem.html"> Código e Explicações (.html): Raspagem de dados em sites estáticos </a>
+</p>
+<p>
+<a href="html/dia_01/01_raspagem.R"> Código de R (.r): Raspagem de dados em sites estáticos </a>
+</p>
+</div>
+</div>
+</div>
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-3" class="panel-title">
+<a data-toggle="collapse" href="#collapse3">Dia 2: Acessando APIs.</a>
+</h2>
+</div>
+<div id="collapse3" class="panel-collapse collapse in" style="margin:12px">
+<p>
+<b>Tópicos:</b> O que é uma Api, como acessar dados usando requests para API, como usar pacotes de R para acessar APIs. E um estudo de caso sobre dados do Twitter
+</p>
+<h4>
+Intro do APIs
+</h4>
+<p>
+<a href="html/dia_02/02_Apis_intro_apresentacao.pdf">SLIDES (.pdf): Acessando APIs </a>
+</p>
+<p>
+<a href="./html/dia_02/02_Apis_intro.html">Códigos e Explicações (.html): Acessando APIs</a>
+</p>
+<p>
+<a href="./html/dia_02/02_Apis_intro.R">Código (.r): Acessando a APIs</a>
+</p>
+<h4>
+Acessando as APIs do Twitter
+</h4>
+<p>
+<a href="./html/dia_02/02_Apis_twitter_apresentacao.pdf">SLIDES (.pdf): Coletando dados no Twitter </a>
+</p>
+<p>
+<a href="./html/dia_02/02_Apis_twitter.html">Códigos e Explicações (.html): Coletando dados no Twitter</a>
+</p>
+<p>
+<a href="./html/dia_02/02_Apis_twitter.R">Código (.r): Coletando dados no Twitter </a>
+</p>
+</div>
+</div>
+</div>
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-3" class="panel-title">
+<a data-toggle="collapse" href="#collapse3">Dia 3: Um artigo com dados do Twitter do início ao fim.</a>
+</h2>
+</div>
+<div id="collapse3" class="panel-collapse collapse in" style="margin:12px">
+<p>
+<b>Objetivo:</b>
+</p>
+<p>Iremos replicar juntos o artigo <a href="http://tiagoventura.rbind.io/files/Sharing_News_in__Bolsonaro.pdf">Polarization, News Sharing, and Gatekeeping: A study of the #Bolsonaro Election</a> que estou trabalhando com co-autores. A idéia é demonstrar uma análise com dados de twitter do começo ao fim. Além disso, vou mostar um pouco de como eu escrevo, e como o R é uma ferramenta sensacional para produzir pesquisas replicáveis. Vamos acabar cobrindo um pouco de LaTeX também, porém, não se assustem. Isto não é o fundamental.</p>
+<p>
+<a href="http://tiagoventura.rbind.io/files/Sharing_News_in__Bolsonaro.pdf"> Artigo: Polarization, News Sharing, and Gatekeeping: A study of the #Bolsonaro Election</a>
+</p>
+<p>
+<a href="./html/dia_03/dia_03_twitter_polarization.html">Códigos e Explicações (.html)</a>
+</p>
+<p>
+<a href="./html/dia_03/dia_03_twitter_polarization.R">Códigos em R (.R)</a>
+</p>
+</div>
+</div>
+</div>
+
+<footer class="footer" id="copyright">
+  <div class="container">
+      <p class="text-muted">
+          © Jeffrey Arnold, 2016, <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </p>
+  </div>
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

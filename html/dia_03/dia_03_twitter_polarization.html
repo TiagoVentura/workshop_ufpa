@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Polarization, News Sharing, and Gatekeeping: A study of the Bolsonaro Election</title>
+
+<script src="dia_03_twitter_polarization_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="dia_03_twitter_polarization_files/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="dia_03_twitter_polarization_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="dia_03_twitter_polarization_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="dia_03_twitter_polarization_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="dia_03_twitter_polarization_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="dia_03_twitter_polarization_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="dia_03_twitter_polarization_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="dia_03_twitter_polarization_files/navigation-1.1/tabsets.js"></script>
+<link href="dia_03_twitter_polarization_files/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="dia_03_twitter_polarization_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Polarization, News Sharing, and Gatekeeping: A study of the Bolsonaro Election</h1>
+
+</div>
+
+
+<div id="introdução" class="section level1">
+<h1>Introdução</h1>
+<p>O objetivo do dia de hoje é replicar uma análise do início ao fim utilizando dados do Twitter. Isso nos dará prática acadêmica em análise de dados do twitter e em análise de redes Objetivo também mostrar para vocês um pouco como eu produzo minhas pesquisas, combinando a análise em R com a escrita acadêmica.</p>
+<p>Vamos replicar parte da análise de dados do meu artigo com Ernesto Calvo e Natalia Aruguete <a href="http://tiagoventura.rbind.io/files/Sharing_News_in__Bolsonaro.pdf">Polarization, News Sharing, and Gatekeeping: A study of the Bolsonaro Election</a>. Vamos focar principalmente na parte descritiva do paper. Os modelos estatísticos abordam métodos que não cubrimos aqui, e ficarão para o próximo curso em 2020. Este paper ainda está em andamento, portanto, peço algum cuidado antes de compartilhá-lo. A maior parte destes códigos abaixo são emprestados de <a href="http://gvptsites.umd.edu/calvo/">Ernesto Calvo</a></p>
+<p>Todo o material para o dia de hoje está disponível neste <a href="https://www.dropbox.com/sh/kcpofgb7qf2ukrp/AACFKGDPaPSCvSRvrk_WAK8Sa?dl=0">link</a>. Baixe todos os arquivos em uma pasta, e direcione o R para esta pasta usando a função <code>setwd</code> para definir sua estação de trabalho.</p>
+</div>
+<div id="abrindo-o-banco-de-dados" class="section level1">
+<h1>Abrindo o banco de dados</h1>
+<p>O primeiro passo é abrir o banco de dados. Nós coletamos dados do twitter na semana anterior ao segundo turno da eleição no Brasil. Para este artigo, utilizamos um programa em <code>Python</code> para fazer o download dos dados. Por isto, o formato dos dados é ligeiramente diferente do que vimos anteriormente.</p>
+<pre class="r"><code># Ative os pacotes
+
+library(tidyverse)
+library(igraph)
+library(data.table)
+library(arm)
+library(broom)
+library(RColorBrewer)
+library(KernSmooth)
+
+
+
+# Abra o banco de dados
+getwd()</code></pre>
+<pre><code>[1] &quot;C:/Users/Tiago Ventura/Dropbox/webscraping_workshop_ufpa/html/dia_03&quot;</code></pre>
+<pre class="r"><code># setwd(&#39;./html/dia_03/&#39;)
+load(&quot;dados_bolsonaro.RData&quot;)
+summary(dados_bolsonaro)</code></pre>
+<pre><code>     text             tweetidT          tweetidRT        
+ Length:2943993     Length:2943993     Length:2943993    
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  
+   friendsT          friendsRT          followersT       
+ Length:2943993     Length:2943993     Length:2943993    
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  
+ followersRT           timeRT             timeT          
+ Length:2943993     Length:2943993     Length:2943993    
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  
+  verifiedRT         verifiedT           nameauth        
+ Length:2943993     Length:2943993     Length:2943993    
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  
+   namehub              web               device         
+ Length:2943993     Length:2943993     Length:2943993    
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  </code></pre>
+</div>
+<div id="pensando-em-redes" class="section level1">
+<h1>Pensando em Redes</h1>
+<p>Há milhões de formas de análisar dados de twitter. Porém, um dos elementos centrais em plataformas como estas é o fato dos usuários interagirem entre si. Portanto, estes usuários se conectam em redes. Uma rede possui dois elementos básicos: um nó - usuário - e um link - que iremos considerar um retweet. Por isso, construíremos uma rede de retuítes entre usuários.</p>
+<p>No banco de dados, as variáveis que terminam com T são referentes ao usuário que foi retuitado e as com RT se referem aos que retuitaram. Desta forma, a ligação entre T e RT formam os links desta rede.</p>
+<p>Para construir a rede de conexões, vamos usar o pacote <code>igraph</code>. Este pacote armazena dados de forma um tanto distinta, porém, é a forma mais intuitiva de manipular dados de rede em R.</p>
+<pre class="r"><code># Construíndo uma rede
+
+# Passo 1: Selecione os nós -- Autoridades -&gt; Hub
+
+data &lt;- cbind(dados_bolsonaro$namehub, dados_bolsonaro$nameauth)
+head(data)</code></pre>
+<pre><code>     [,1]       [,2]             
+[1,] &quot;jeffer21&quot; &quot;futebol_pontual&quot;
+[2,] &quot;jeffer21&quot; &quot;lobaoeletrico&quot;  
+[3,] &quot;jeffer21&quot; &quot;MouraoVice&quot;     
+[4,] &quot;jeffer21&quot; &quot;MouraoVice&quot;     
+[5,] &quot;jeffer21&quot; &quot;maepatriota&quot;    
+[6,] &quot;jeffer21&quot; &quot;conservadores&quot;  </code></pre>
+<pre class="r"><code># Passo 2: Crie a estrutura da rede
+net &lt;- graph.empty()  # Cria um gráfico vazio
+net &lt;- add.vertices(net, length(unique(c(data))), name = as.character(unique(c(data))))  # número de nós
+net &lt;- add.edges(net, t(data))
+
+summary(net)</code></pre>
+<pre><code>IGRAPH 93931bb DN-- 162107 2943993 -- 
++ attr: name (v/c)</code></pre>
+<pre class="r"><code># Passo3: Adicione as variáveis
+
+E(net)$text &lt;- dados_bolsonaro$text
+E(net)$tweetidT &lt;- dados_bolsonaro$tweetidT
+E(net)$tweetidRT &lt;- dados_bolsonaro$tweetidRT
+E(net)$friendsT &lt;- dados_bolsonaro$friendsT
+E(net)$followersT &lt;- dados_bolsonaro$followersT
+E(net)$friendsRT &lt;- dados_bolsonaro$friendsRT
+E(net)$followersRT &lt;- dados_bolsonaro$followersRT
+E(net)$timeRT &lt;- dados_bolsonaro$timeRT
+E(net)$timeT &lt;- dados_bolsonaro$timeT
+E(net)$verifiedRT &lt;- dados_bolsonaro$verifiedRT
+E(net)$verifiedT &lt;- dados_bolsonaro$verifiedT
+E(net)$nameauth &lt;- dados_bolsonaro$nameauth
+E(net)$namehub &lt;- dados_bolsonaro$namehub
+E(net)$web &lt;- dados_bolsonaro$web
+E(net)$device &lt;- dados_bolsonaro$device
+
+summary(net)</code></pre>
+<pre><code>IGRAPH 93931bb DN-- 162107 2943993 -- 
++ attr: name (v/c), text (e/c), tweetidT (e/c), tweetidRT (e/c),
+| friendsT (e/c), followersT (e/c), friendsRT (e/c), followersRT
+| (e/c), timeRT (e/c), timeT (e/c), verifiedRT (e/c), verifiedT
+| (e/c), nameauth (e/c), namehub (e/c), web (e/c), device (e/c)</code></pre>
+<p>O próximo passo é calcular algumas estatísticas que produzem redes de conexões como as que vemos circulando em sites por aí. Para isso, há dois processos. Ambos consistem em aplicar algoritimos para extrair informações da rede. Primeiro, construímos um layout – achamos pontos para os nós em duas dimensões - e depois identificamos quantas comunidades temos na nossa rede.</p>
+<p>O código abaixo ensina como fazer isto. Porém, ambos os processos são muito intensos do ponto de vista computacional. Por isso, eu já salvei os objetos.</p>
+<pre class="r"><code># Adicionar indegree and outdegree
+V(net)$outdegree &lt;- degree(net, mode = &quot;out&quot;)
+V(net)$indegree &lt;- degree(net, mode = &quot;in&quot;)
+
+# Não rode isso. Vai travar seu PC
+
+# Layout system.time(l &lt;- layout_with_fr(net, grid = c(&#39;nogrid&#39;)))
+
+# Comunidades my.com.fast &lt;- walktrap.community(net)
+
+# Abrindo o material salvo
+load(&quot;vertices_bolsonaro.Rdata&quot;)
+
+# Adicionando a rede
+
+V(net)$l1 &lt;- vertices_bolsonaro$l1
+V(net)$l2 &lt;- vertices_bolsonaro$l2
+V(net)$membership &lt;- vertices_bolsonaro$membership
+
+summary(net)</code></pre>
+<pre><code>IGRAPH 93931bb DN-- 162107 2943993 -- 
++ attr: name (v/c), outdegree (v/n), indegree (v/n), l1 (v/n), l2
+| (v/n), membership (v/n), text (e/c), tweetidT (e/c), tweetidRT
+| (e/c), friendsT (e/c), followersT (e/c), friendsRT (e/c),
+| followersRT (e/c), timeRT (e/c), timeT (e/c), verifiedRT (e/c),
+| verifiedT (e/c), nameauth (e/c), namehub (e/c), web (e/c),
+| device (e/c)</code></pre>
+<div id="quais-as-maiores-comunidades" class="section level2">
+<h2>Quais as maiores comunidades?</h2>
+<pre class="r"><code>comunidades &lt;- data_frame(membership = V(net)$membership)
+
+comunidades %&gt;% count(membership) %&gt;% arrange(desc(n)) %&gt;% top_n(5)</code></pre>
+<pre><code># A tibble: 5 x 2
+  membership     n
+       &lt;dbl&gt; &lt;int&gt;
+1          1 91116
+2          2 62289
+3          5  3211
+4          4   653
+5          9   257</code></pre>
+</div>
+<div id="quem-são-os-mais-influentes-em-cada-comunidade" class="section level2">
+<h2>Quem são os mais influentes em cada comunidade?</h2>
+<p>Vamso usar aqui o conceito de in-degree e out-degree. In-degree significa quantos links direcionados a si o usuário possui. Portanto, em nosso caso mostra quantos retweets este usuário recebeu. O oposto explica out-degree. Neste caso, out-degree significa quantos retuites o usuario deu.</p>
+<p>Um usuário é chamado de autoridade quando seu in-degree é alto. Ou seja, muitos usuários o retuítam. Chamamos de hub quando seu out-degree é alto, pois este usuário retuíta muito frequentemente. Os robôs do Bolsonaro são, portanto, hubs – ninguém retuíta eles, eles somente retuítam muito, e muito rápido.</p>
+<p>Para medir as autoridades de cada comunidades, irei primeiro selecionar as principais autoridades por comunidade. Em seguida, plotaremos quem são esses usuários, e quantos retuítes receberam neste período pré-eleição.</p>
+<pre class="r"><code># Cria um banco com indegree
+
+autoridade &lt;- data_frame(name = V(net)$name, ind = V(net)$indegree, membership = V(net)$membership) %&gt;% 
+    filter(membership == 1 | membership == 2 | membership == 5) %&gt;% split(.$membership) %&gt;% 
+    map(~arrange(., desc(ind))) %&gt;% map(~slice(., 1:30))
+
+
+
+
+# Comunidade 1
+
+ggplot(autoridade[[1]], aes(x = reorder(name, ind), y = ind)) + geom_histogram(stat = &quot;identity&quot;, 
+    width = 0.5, color = &quot;black&quot;, fill = &quot;darkred&quot;) + coord_flip() + xlab(&quot;&quot;) + 
+    ylab(&quot;&quot;) + theme_minimal(base_size = 12) + theme(plot.title = element_text(size = 22, 
+    face = &quot;bold&quot;), axis.title = element_text(size = 16), axis.text = element_text(size = 12, 
+    face = &quot;bold&quot;))</code></pre>
+<p><img src="dia_03_twitter_polarization_files/figure-html/autoridade-1.png" width="672" /></p>
+<pre class="r"><code># Comunidade 2
+
+ggplot(autoridade[[2]], aes(x = reorder(name, ind), y = ind)) + geom_histogram(stat = &quot;identity&quot;, 
+    width = 0.5, color = &quot;black&quot;, fill = &quot;yellow&quot;) + coord_flip() + xlab(&quot;&quot;) + 
+    ylab(&quot;&quot;) + theme_minimal(base_size = 12) + theme(plot.title = element_text(size = 22, 
+    face = &quot;bold&quot;), axis.title = element_text(size = 16), axis.text = element_text(size = 12, 
+    face = &quot;bold&quot;))</code></pre>
+<p><img src="dia_03_twitter_polarization_files/figure-html/autoridade-2.png" width="672" /></p>
+<pre class="r"><code># Comunidade 3
+
+ggplot(autoridade[[3]], aes(x = reorder(name, ind), y = ind)) + geom_histogram(stat = &quot;identity&quot;, 
+    width = 0.5, color = &quot;black&quot;, fill = &quot;steelblue&quot;) + coord_flip() + xlab(&quot;&quot;) + 
+    ylab(&quot;&quot;) + theme_minimal(base_size = 12) + theme(plot.title = element_text(size = 22, 
+    face = &quot;bold&quot;), axis.title = element_text(size = 16), axis.text = element_text(size = 12, 
+    face = &quot;bold&quot;))</code></pre>
+<p><img src="dia_03_twitter_polarization_files/figure-html/autoridade-3.png" width="672" /></p>
+<p>Como a idéia deste workshop é também mostrar como eu organizo minha dinâmica de trabalho, o código abaixo mostra como eu conecto meus resultados e a escrita do artigo. A dinâmica é simples:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Escreve uma função para gerar o gráfico.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Salva o gráfico na sua pasta de resultados.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Conecta a escrita com a pasta de resultados.</li>
+</ol></li>
+</ul>
+<p>No meu caso, eu uso LaTeX para escrever meus artigos. Este workshop não é sobre LaTeX, porém, vou mostrar rapidamente com um exemplo. Se você quiser usar LaTeX, excelente. Caso não, continue em word, porém, use esse sistema para salvar arquivos.</p>
+<pre class="r"><code># Cria uma função
+
+plot_autoridades &lt;- function(dados, nome_arquivo, base) {
+    ggplot(dados, aes(x = reorder(name, ind), y = ind)) + geom_histogram(stat = &quot;identity&quot;, 
+        width = 0.5, color = &quot;black&quot;, fill = &quot;darkred&quot;) + coord_flip() + xlab(&quot;&quot;) + 
+        ylab(&quot;&quot;) + theme_minimal(base_size = 16) + theme(plot.title = element_text(size = 22, 
+        face = &quot;bold&quot;), axis.title = element_text(size = 22), axis.text = element_text(size = 12, 
+        face = &quot;bold&quot;))
+    
+    ggsave(filename = paste0(base, nome_arquivo), width = 12, height = 12, units = &quot;in&quot;, 
+        pointsize = 22, bg = &quot;white&quot;)
+}
+
+# Endereço no meu computador
+base = &quot;C:/Users/Tiago Ventura/Dropbox/Apps/Overleaf/workshop_UFPA_rep/&quot;
+
+# Usa a função para gerar o arquivo
+plot_autoridades(dados = autoridade[[1]], base = base, nome_arquivo = &quot;auth_antibolsonaro.png&quot;)
+plot_autoridades(dados = autoridade[[2]], base = base, nome_arquivo = &quot;auth_bolsonaro.png&quot;)</code></pre>
+<p><br></p>
+<p>Vejam como salva automáticamente em minha pasta.</p>
+<p><img src="explorer.png" /></p>
+<p>Vejam como eu conecto meu editor de texto com minha pasta. Ou seja, eu gero o resultado no R, e salvo automaticamente na escrita. Não perco tempo indo e vindo entre programas.</p>
+<p><img src="overleaf.png" /></p>
+</div>
+<div id="ok-tiago-but-why" class="section level2">
+<h2>Ok, Tiago, but why?!?</h2>
+<p>A resposta é simples. É fato de que há uma curva de aprendizado em conectar esses diversos programas. Porém, com o tempo, tudo fica mais rápido. Não tem mais copia e cola entre o R, ou Stata, ou Excel, e o word. A integração entre R e LaTeX é fenômenal, e salva bastante tempo no seu futuro.</p>
+<p>Em segundo lugar, minha pesquisa inteira é reproduzível e transparente, como toda ciência deve ser. Se eu mandar meu arquivo de R e meu arquivo de LaTeX, você pode reproduzir meu artigo inteiro.</p>
+<p>Terceiro, cuidar de citações é mais fácil em LaTeX.</p>
+<p>Quarto, arquivos de LaTeX são mais bonitos 😊</p>
+</div>
+<div id="visualizando-hashtags" class="section level2">
+<h2>Visualizando Hashtags</h2>
+<p>Vamos agora visualizar quais as hashtags mais mencionadas na rede de tweets com o termo Bolsonaro. Este processe envolve uma pouco de análise de texto, e usar uma técnica chamada expressões regulares. Expressões regulares são basicamente um conjunto de regras - comuns em diversas linguagens de programação - para detectar texto. Ou seja, ao invés de utilizar cada palavra, o programado usa essas regras para detectar palavras em abstrato.</p>
+<pre class="r"><code># Cria um padrão de busca
+library(rebus)
+padrao_regexpres &lt;- &quot;#[A-Za-z]+[A-Za-z0-9_]+&quot;
+# Coletamos qualquer palavra precedida de um #
+
+
+
+# Vamos usar um exemplo pra testar
+
+
+hashtags &lt;- dados_bolsonaro %&gt;% mutate(hashtag = str_extract_all(text, padrao_regexpres)) %&gt;% 
+    unnest()
+
+
+hashtags %&gt;% count(hashtag) %&gt;% arrange(desc(n)) %&gt;% slice(1:10)</code></pre>
+<pre><code># A tibble: 10 x 2
+   hashtag                     n
+   &lt;chr&gt;                   &lt;int&gt;
+ 1 #SomosBolsonaro17       57232
+ 2 #EleN                   56410
+ 3 #TodosComBolsonaro      39520
+ 4 #MudaBrasilComBolsonaro 18472
+ 5 #BolsonaroAmorDoBrasil  16925
+ 6 #EleSim                 15020
+ 7 #Elei                   13120
+ 8 #VEJA600MILHOES         10521
+ 9 #BolsonaroNaCadeia       9819
+10 #Brasil                  9638</code></pre>
+<div id="most-popular-hashtags" class="section level3">
+<h3>Most Popular Hashtags</h3>
+<pre class="r"><code># Contando as hashtags
+
+data_hash &lt;- hashtags %&gt;% count(hashtag) %&gt;% arrange(desc(n)) %&gt;% slice(1:30)
+
+ggplot(data_hash, aes(x = reorder(hashtag, n), y = n)) + geom_histogram(stat = &quot;identity&quot;, 
+    width = 0.5, color = &quot;black&quot;, fill = &quot;steelblue&quot;) + coord_flip() + xlab(&quot;&quot;) + 
+    ylab(&quot;&quot;) + theme_minimal(base_size = 12) + theme(plot.title = element_text(size = 22, 
+    face = &quot;bold&quot;), axis.title = element_text(size = 16), axis.text = element_text(size = 12, 
+    face = &quot;bold&quot;))</code></pre>
+<p><img src="dia_03_twitter_polarization_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="hashtags-em-cada-comunidade" class="section level3">
+<h3>Hashtags em cada comunidade</h3>
+<pre class="r"><code># Primeiro, vamos fazer um merge com os dados de comunidade
+hashtags &lt;- left_join(hashtags, vertices_bolsonaro)
+
+# Tres Colunas novas
+colnames(hashtags)</code></pre>
+<pre><code> [1] &quot;text&quot;        &quot;tweetidT&quot;    &quot;tweetidRT&quot;   &quot;friendsT&quot;    &quot;friendsRT&quot;  
+ [6] &quot;followersT&quot;  &quot;followersRT&quot; &quot;timeRT&quot;      &quot;timeT&quot;       &quot;verifiedRT&quot; 
+[11] &quot;verifiedT&quot;   &quot;nameauth&quot;    &quot;namehub&quot;     &quot;web&quot;         &quot;device&quot;     
+[16] &quot;hashtag&quot;     &quot;membership&quot;  &quot;l1&quot;          &quot;l2&quot;         </code></pre>
+<pre class="r"><code># Vamos aggrupar por comunidade
+
+hashtags_por_comunidade &lt;- hashtags %&gt;% filter(membership == 1 | membership == 
+    2) %&gt;% mutate(membership = as_factor(membership), membership = fct_recode(membership, 
+    `Anti-Bolsonaro` = &quot;1&quot;, Bolsonaro = &quot;2&quot;))
+
+
+data_hash &lt;- hashtags_por_comunidade %&gt;% group_by(membership, hashtag) %&gt;% summarise(n = n()) %&gt;% 
+    top_n(10, n)
+
+
+g &lt;- ggplot(data_hash, aes(x = reorder(hashtag, n), y = n, fill = membership)) + 
+    geom_histogram(stat = &quot;identity&quot;, width = 0.5, color = &quot;black&quot;) + coord_flip() + 
+    xlab(&quot;&quot;) + ylab(&quot;&quot;) + scale_fill_manual(name = &quot;Comunidade&quot;, values = c(&quot;Red&quot;, 
+    &quot;Yellow&quot;, &quot;Gray&quot;)) + theme_minimal(base_size = 16) + theme(plot.title = element_text(size = 22, 
+    face = &quot;bold&quot;), axis.title = element_text(size = 12), axis.text = element_text(size = 12, 
+    face = &quot;bold&quot;), strip.text = element_text(size = 16)) + facet_wrap(~membership, 
+    scale = &quot;free&quot;)
+
+# Save
+ggsave(plot = g, filename = &quot;graph_community.png&quot;, width = 12, height = 12, 
+    units = &quot;in&quot;, pointsize = 22, bg = &quot;white&quot;)</code></pre>
+<p><img src="graph_community.png" /></p>
+</div>
+</div>
+</div>
+<div id="visualizando-informações-em-rede" class="section level1">
+<h1>Visualizando informações em rede</h1>
+<p>Vamos agora visualizar um pouco das atividades nestes dados usando a rede de retweets. A diferença é a seguinte. Mais importante do que entender descrições agregadas dos dados, é fundamental entender em quais comunidades destes dados a informação é mais ativadade. Esta lógica nos permite entender quais hastags são mais ativades por seguidores de Bolsonaro, e por opositores, quais termos, quais mídias, entre outros.</p>
+<p>Para tornar o gráfico um pouco mais limpo, eu criei uma função onde calculo a densidade de usuários na rede. Isso evita que eu plote todos os usuários da rede.</p>
+<pre class="r"><code># Funcao para visualizar a red
+
+my.den.plot &lt;- function(l = l, new.color = new.color, ind = ind, legend) {
+    # Numero efectivo de Comunidades
+    ENCG &lt;- round(1/sum(round(table(new.color)/sum(table(new.color)), 3)^2), 
+        2)
+    
+    est &lt;- bkde2D(l, bandwidth = c(10, 10))
+    plot(l, cex = log(ind + 1)/4, col = new.color, pch = 16, xlim = c(-160, 
+        140), ylim = c(-140, 120), xlab = &quot;&quot;, ylab = &quot;&quot;, axes = FALSE)
+    contour(est$x1, est$x2, est$fhat, col = gray(0.6), add = TRUE)
+    legend(&quot;topright&quot;, c(legend[1], legend[2]), pch = 17:18, col = c(&quot;#B2182B&quot;, 
+        &quot;#2166AC&quot;))
+    text(-140, 115, paste(&quot;ENCG: &quot;, ENCG, sep = &quot;&quot;), cex = 1, srt = 0)
+}
+
+# Crie as cores para cada comunidade
+
+# Building a empty containes
+temp &lt;- rep(1, length(V(net)$membership))
+new.color &lt;- &quot;white&quot;
+new.color[V(net)$membership == 1] &lt;- &quot;red&quot;  ####
+new.color[V(net)$membership == 2] &lt;- &quot;blue&quot;  ####
+new.color[V(net)$membership == 5] &lt;- &quot;gray&quot;  ####
+
+# Adiciona a nova cor
+V(net)$new.color &lt;- new.color
+
+
+# Plot
+
+# save first
+png(filename = &quot;Bolsonarobasicmap.png&quot;, width = 8, height = 8, units = &quot;in&quot;, 
+    pointsize = 12, bg = &quot;white&quot;, res = 300)
+my.den.plot(l = cbind(V(net)$l2, V(net)$l1), new.color = V(net)$new.color, ind = V(net)$indegre, 
+    legend = c(&quot;Anti-Bolsonaro&quot;, &quot;Pro-Bolsonaro&quot;))
+dev.off()</code></pre>
+<pre><code>png 
+  2 </code></pre>
+<p><img src="Bolsonarobasicmap.png" /></p>
+<div id="analizando-ativação-das-mídias-na-rede" class="section level2">
+<h2>Analizando ativação das mídias na rede</h2>
+<p>O principal argumento do artigo que estamos replicando aqui se refere à quando e como usuários nas redes sociais interagem com blogs, sites e jornais on line. Para testarmos a teoria, realizamos um conjunto de testes estatísticos. Porém, antes disso, demonstramos como as mídias no twitter são ativadas de forma distinta por usuários. Ou seja, basicamente criamos uma forma para detectar em quais áreas da rede, cada mídia é mais ativada. Para isso, usamos os links que usuários anexam aos seus tuítes quando estão compartilhando uma notícia.</p>
+<p>Nos próximos códigos, vou demonstrar como contruímos essas estimativas, e replicar a figura 6 do artigo.</p>
+<div id="contando-o-número-de-menções-por-nó." class="section level4">
+<h4>Contando o número de menções por nó.</h4>
+<pre class="r"><code># Vamos primeiro selecionar as mídias mais ativadas
+keynews &lt;- head(sort(table(unlist(E(net)$web)), decreasing = TRUE), 12)
+keynews.names &lt;- names(keynews)
+
+N &lt;- length(keynews.names)
+count.keynews &lt;- array(0, dim = c(length(E(net)), N))
+
+# Looping
+for (i in 1:N) {
+    temp &lt;- grepl(keynews.names[i], E(net)$web, ignore.case = TRUE)
+    # temp &lt;- str_match(E(net)$text,&#39;Arangur[A-Za-z]+[A-Za-z0-9_]+&#39;)
+    count.keynews[temp == TRUE, i] &lt;- 1
+    Sys.sleep(0.1)
+    
+}
+
+
+# Setting the names of the media
+
+colnames(count.keynews) &lt;- keynews.names</code></pre>
+</div>
+<div id="recuperando-a-matrix-de-vizinhança-da-rede." class="section level4">
+<h4>Recuperando a matrix de vizinhança da rede.</h4>
+<pre class="r"><code># Conexoes de Vertices e Edges Vamos recuperar todos os nós e edges que
+# estão ligados uns com os outros.
+
+el &lt;- get.adjedgelist(net, mode = &quot;all&quot;)
+al &lt;- get.adjlist(net, mode = &quot;all&quot;)</code></pre>
+<pre><code> [1]     47    188   1408   1408   1771   1853   2197   2662   5347   8017
+[11]   9930  11807  11807  13435  16527  27569  27781  28090  29874  31508
+[21]  35401  35401  36186  41253  43403  43403  43403  43403  47826  48295
+[31]  49788  50585  54540  55862  56208  56616  56616  60101  61526  65337
+[41]  66191  69025  73941  82405  83865  87228  87228  88106  88106  89031
+[51]  89265  90991  96382 105144 105159 105811 106669 106669 106669 107060
+[61] 107060 108018 108018 133347 138393 142192 142448 142448 142839 142850
+[71] 142850 142850 142850 142871 142887 142923 142952 146364 146652</code></pre>
+</div>
+<div id="função-para-verificar-activação-na-rede" class="section level4">
+<h4>Função para verificar activação na rede</h4>
+<pre class="r"><code>fomfE &lt;- function(var = var, adjV = adjV, adjE = adjE) {
+    stemp &lt;- sapply(adjE, function(x) sum(var[x]))
+    mstemp &lt;- sapply(adjV, function(x) mean(stemp[x]))
+    out &lt;- cbind(stemp, mstemp)
+}
+
+
+
+# Cria um container
+resultado_midia &lt;- array(0, dim = c(length(V(net)), N))
+
+for (i in 1:N) {
+    bb &lt;- fomfE(count.keynews[, i], al, el)
+    bb[bb[, 1] == &quot;NaN&quot;] &lt;- 0
+    resultado_midia[, i] &lt;- bb[, 1]
+}
+
+
+colnames(resultado_midia) &lt;- keynews.names
+
+head(resultado_midia)</code></pre>
+<pre><code>     www.oantagonista.com twitter.com www1.folha.uol.com.br glo.bo
+[1,]                    3           0                     1      0
+[2,]                    0           2                     3      1
+[3,]                    3           1                     0      0
+[4,]                    0           1                     9      3
+[5,]                  114          39                    17      9
+[6,]                    5           2                     1      1
+     conexaopolitica.com.br youtu.be veja.abril.com.br
+[1,]                      1        2                 0
+[2,]                      0        0                 1
+[3,]                      4        0                 1
+[4,]                      0        3                 0
+[5,]                     28       22                 3
+[6,]                      2        4                 0
+     www.diariodocentrodomundo.com.br www.brasil247.com abr.ai
+[1,]                                0                 0      0
+[2,]                                0                 0      0
+[3,]                                0                 0      2
+[4,]                               30                34      3
+[5,]                                1                 0      9
+[6,]                                1                 0      1
+     politica.estadao.com.br noticias.uol.com.br
+[1,]                       0                   0
+[2,]                       0                   0
+[3,]                       0                   0
+[4,]                       1                   9
+[5,]                       9                   3
+[6,]                       1                   1</code></pre>
+</div>
+<div id="visualizando-gráficos-de-ativação" class="section level3">
+<h3>Visualizando Gráficos de Ativação</h3>
+<p>Você pode facilmente fazer um por um. Porém, escrevi um loop curtinho para plotar eles juntos.</p>
+<pre class="r"><code>op &lt;- par(mfcol = c(3, 4))
+for (i in 1:12) {
+    plot(V(net)$l2, V(net)$l1, pch = 16, col = V(net)$new.color, cex = log(resultado_midia[, 
+        i] + 1)/3, ylim = c(-130, 130), xlim = c(-130, 130), xlab = &quot;&quot;, ylab = &quot;&quot;, 
+        main = colnames(resultado_midia)[i], cex.main = 1)
+}</code></pre>
+<p><img src="dia_03_twitter_polarization_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code>par(op)
+dev.off()</code></pre>
+<pre><code>null device 
+          1 </code></pre>
+<p>Aqui segue a versão da função caso eu quisesse salvar os resultados em minha pasta.</p>
+<pre class="r"><code>for (i in 1:12) {
+    # Salva primeiro
+    png(filename = paste0(base, &quot;Embedded News&quot;, colnames(resultado_midia)[i], 
+        &quot;Bolsonaro.png&quot;), width = 16, height = 8, units = &quot;in&quot;, pointsize = 12, 
+        bg = &quot;white&quot;, res = 100)
+    
+    # Plota o gráfico
+    plot(V(net)$l2, V(net)$l1, pch = 16, col = V(net)$new.color, cex = log(resultado_midia[, 
+        i] + 1)/3, ylim = c(-130, 130), xlim = c(-130, 130), xlab = &quot;&quot;, ylab = &quot;&quot;, 
+        main = colnames(resultado_midia)[i], cex.main = 1)
+    
+    # Fecha a função de salvar
+    dev.off()
+}</code></pre>
+</div>
+</div>
+<div id="exercício-do-dia" class="section level2">
+<h2>Exercício do Dia</h2>
+<p>O exercício do dia é relativamente simples. Qualquer informação pode ser visualizada em redes como fizemos para as mídias. Por isso, quero que vocÊs trabalhem em duas extensões.</p>
+<ol style="list-style-type: decimal">
+<li><p>Replicam os gráficos de ativação em rede para as dez hashtags mais populares na rede</p></li>
+<li><p>Repliquem os gráficos para alguns temas chaves, por exemplo, segurança, corrupção, crime. Sejam criativos.</p></li>
+</ol>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

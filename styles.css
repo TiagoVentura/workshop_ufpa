@@ -1,0 +1,57 @@
+/* links */
+  
+  a {
+    color: #E13D3D;
+      cursor: pointer;
+  }
+
+a:active, 
+a:focus, 
+a:hover {
+  color: #d03b39;
+}
+
+
+/* text */
+  
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    font-family: 'Lato', sans-serif;
+  }
+
+body {
+  color: #333;
+  font-family: 'Lato', sans-serif;
+  background-color: #f7f7f7;
+
+}
+
+/* navbar*/
+
+
+/* nav */
+
+.navbar-light .navbar-nav>.nav-item>.nav-link,
+.navbar-light .navbar-nav>.nav-item>.nav-link:focus,
+.navbar-light .navbar-nav>.nav-item>.nav-link:hover,
+.navbar-light .navbar-nav>.nav-item>.nav-link:active {
+  font-weight: 700;
+}
+
+.navbar-light .navbar-nav > li.nav-item > a.active, 
+.navbar-light .navbar-nav > li.nav-item > a.active:focus, 
+.navbar-light .navbar-nav > li.nav-item > a.active:hover {
+  font-weight: 700;
+  transition: color .2s ease;
+}
+
+.navbar-nav {
+  border-bottom: 2px solid #E13D3D;
+}
+
+.navbar-brand {
+
+  
+}
+
+
